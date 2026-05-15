@@ -7,5 +7,5 @@ const labels = {
 };
 
 export default function StatusBadge({ children, tone = 'neutral' }) {
-  return <span className={`status-badge ${labels[tone] || labels.neutral}`}>{children}</span>;
+  return <span className={`status-badge ${labels[tone] || labels.neutral}`}><i aria-hidden="true" />{children}</span>;
 }

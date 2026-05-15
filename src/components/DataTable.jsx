@@ -8,13 +8,17 @@ export default function DataTable({ columns, rows, getKey }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
+          {rows.length ? rows.map((row, index) => (
             <tr key={getKey ? getKey(row) : index}>
               {columns.map((column) => (
                 <td key={column.key}>{column.render ? column.render(row) : row[column.key]}</td>
               ))}
             </tr>
-          ))}
+          )) : (
+            <tr>
+              <td colSpan={columns.length}>No records to show.</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

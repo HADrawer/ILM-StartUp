@@ -26,8 +26,9 @@ const routeDefaults = {
 
 function getRoute() {
   const hash = window.location.hash.replace('#', '');
-  if (!hash) return { role: 'student', page: 'dashboard' };
+  if (!hash) return { role: null, page: 'landing' };
   if (hash === 'login') return { role: null, page: 'login' };
+  if (hash === 'landing') return { role: null, page: 'landing' };
   const [role, page = 'dashboard', id] = hash.split('/');
   return { role, page, id };
 }

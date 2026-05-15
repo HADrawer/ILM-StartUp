@@ -1,56 +1,52 @@
-import { AlertCircle, Calendar, Clock, Shield, Sparkles } from 'lucide-react';
+import { AlertCircle, CalendarClock, LockKeyhole, ShieldCheck } from 'lucide-react';
 import AppShell from '../components/AppShell.jsx';
-
-const examRows = [
-  { title: 'Data Structures Midterm', course: 'Data Structures', date: 'May 20, 2026', time: '9:00 AM - 11:00 AM', type: 'Secure Exam', tone: 'navy' },
-  { title: 'Machine Learning Final', course: 'Machine Learning', date: 'May 28, 2026', time: '2:00 PM - 4:30 PM', type: 'Secure Exam', tone: 'blue' },
-  { title: 'Software Engineering Quiz', course: 'Software Engineering', date: 'May 24, 2026', time: '11:00 AM - 11:45 AM', type: 'Online Quiz', tone: 'cyan' }
-];
+import Button from '../components/Button.jsx';
+import ListPanel from '../components/ListPanel.jsx';
+import ProgressBar from '../components/ProgressBar.jsx';
+import StatusBadge from '../components/StatusBadge.jsx';
+import { exams } from '../data/mockData.js';
 
 export default function StudentExamsPage(props) {
   return (
-    <AppShell {...props} title="Exams">
-      <section className="ref-page">
-        <h1>Exams</h1>
-        <div className="exam-layout-ref">
-          <section className="ref-panel">
-            <h2>Upcoming Exams</h2>
-            {examRows.map((exam) => (
-              <article className="exam-row-ref" key={exam.title}>
-                <span className={`ref-letter ${exam.tone}`}><Shield size={30} /></span>
+    <AppShell {...props} title="Exams" subtitle="Secure exam windows, readiness checks, rules, and warning states before the timer starts.">
+      <section className="priority-hero exam-landing">
+        <div>
+          <StatusBadge tone="warning">Pre-check recommended</StatusBadge>
+          <h2>Know exactly what is required before entering a secure exam.</h2>
+          <p>ILM separates readiness, identity, device policy, and exam rules so students can fix issues before exam day.</p>
+        </div>
+        <Button as="a" href="#student/exam" icon={ShieldCheck}>Open Secure Exam Center</Button>
+      </section>
+
+      <section className="content-grid wide-left">
+        <ListPanel title="Upcoming Exam Windows" subtitle="Each exam shows duration, readiness, and attempt limits.">
+          <div className="stack-list">
+            {exams.map((exam) => (
+              <article className="exam-row-ref unified" key={exam.title}>
+                <span className="ref-letter navy"><LockKeyhole size={28} /></span>
                 <div>
                   <h3>{exam.title}</h3>
-                  <p>{exam.course}</p>
+                  <p>{exam.course} · {exam.window}</p>
                   <div className="exam-meta-ref">
-                    <span><Calendar size={16} /> {exam.date}</span>
-                    <span><Clock size={16} /> {exam.time}</span>
-                    <span><Shield size={16} /> {exam.type}</span>
+                    <span><CalendarClock size={16} /> {exam.duration}</span>
+                    <span><AlertCircle size={16} /> {exam.questions} questions</span>
+                    <span><ShieldCheck size={16} /> Attempts {exam.attempts}</span>
                   </div>
-                  <a href="#student/exam">View Details</a>
+                  <ProgressBar label="Readiness score" value={exam.readiness} tone="green" />
                 </div>
+                <Button as="a" href="#student/exam" variant="secondary">View Details</Button>
               </article>
             ))}
-          </section>
-          <aside className="exam-side-ref">
-            <section className="gradient-card">
-              <Shield size={24} />
-              <h2>Secure Exam Mode</h2>
-              <p>When you're ready to start your exam, click below to enter secure mode.</p>
-              <a href="#student/exam">Start Secure Exam</a>
-            </section>
-            <section className="ref-side-card">
-              <h2><AlertCircle size={20} /> Exam Rules</h2>
-              <ul>
-                <li>Secure browser required for all exams</li>
-                <li>No external resources allowed</li>
-                <li>Camera must be enabled during exam</li>
-                <li>Screen sharing will be active</li>
-                <li>No switching tabs or windows</li>
-              </ul>
-            </section>
-            <section className="practice-card"><Sparkles size={24} /><strong>AI Practice Quiz</strong></section>
-          </aside>
-        </div>
+          </div>
+        </ListPanel>
+
+        <ListPanel title="Exam Rules" subtitle="Warnings are explicit, recoverable, and not hidden behind color.">
+          <div className="rule-list">
+            <article><ShieldCheck size={18} /><span>Complete camera, microphone, and identity checks before the timer begins.</span></article>
+            <article><LockKeyhole size={18} /><span>Stay inside the secure environment; tab switching creates a warning event.</span></article>
+            <article><AlertCircle size={18} /><span>Contact your instructor if a readiness check fails before the exam window closes.</span></article>
+          </div>
+        </ListPanel>
       </section>
     </AppShell>
   );

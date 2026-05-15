@@ -1,50 +1,46 @@
 import { ArrowRight, GraduationCap, ShieldCheck, UserRoundCheck } from 'lucide-react';
-import Brand from '../components/Brand.jsx';
 import Button from '../components/Button.jsx';
 import StatusBadge from '../components/StatusBadge.jsx';
+import logoUrl from '../assets/ilm-logo.jpeg';
 
 export default function LoginPage({ onLogin }) {
   return (
-    <main className="login-screen">
-      <div className="login-shell">
-        <section className="login-copy">
-          <Brand />
-          <StatusBadge tone="info"><ShieldCheck size={13} /> Demo environment</StatusBadge>
-          <h1>Choose a role and enter the ILM academic workspace.</h1>
-          <p>
-            The prototype opens directly into realistic product flows for students and instructors. No authentication or backend is connected.
-          </p>
-          <div className="login-stats">
-            <div><strong>5</strong><span>Core modules</span></div>
-            <div><strong>1</strong><span>Academic workspace</span></div>
-            <div><strong>0</strong><span>Backend services</span></div>
-          </div>
-        </section>
+    <main className="role-entry">
+      <a className="role-entry-logo" href="#landing" aria-label="Back to ILM landing">
+        <img src={logoUrl} alt="" />
+        <span>ILM</span>
+      </a>
 
-        <section className="role-panel" aria-label="Demo role selection">
-          <div className="role-panel-head">
-            <span className="eyebrow">Role Selection</span>
-            <h2>Start presentation mode</h2>
-          </div>
-          <button className="role-card" onClick={() => onLogin('student')}>
-            <span className="role-icon"><GraduationCap size={24} /></span>
-            <div>
-              <strong>Student Workspace</strong>
-              <p>Courses, assignments, grade preview, live class, and secure exam readiness.</p>
-            </div>
-            <ArrowRight size={20} />
+      <section className="role-entry-card" aria-label="Choose a demo role">
+        <div className="role-entry-copy">
+          <StatusBadge tone="info">Presentation mode</StatusBadge>
+          <h1>Choose the workspace you want to present.</h1>
+          <p>
+            No authentication is connected. Each role opens a realistic mock workflow
+            for the ILM academic operating system.
+          </p>
+        </div>
+
+        <div className="role-choice-grid">
+          <button type="button" onClick={() => onLogin('student')}>
+            <span><GraduationCap size={24} /></span>
+            <strong>Student Workspace</strong>
+            <small>Today’s classes, courses, assignments, grades, announcements, and secure exam readiness.</small>
+            <ArrowRight size={19} />
           </button>
-          <button className="role-card doctor" onClick={() => onLogin('doctor')}>
-            <span className="role-icon"><UserRoundCheck size={24} /></span>
-            <div>
-              <strong>Doctor Workspace</strong>
-              <p>Course operations, submissions, AI detector, generator, secure exams, and analytics.</p>
-            </div>
-            <ArrowRight size={20} />
+          <button type="button" onClick={() => onLogin('doctor')}>
+            <span><UserRoundCheck size={24} /></span>
+            <strong>Doctor Workspace</strong>
+            <small>Course operations, submissions, AI detector, assessment generator, exams, live classes, and analytics.</small>
+            <ArrowRight size={19} />
           </button>
-          <Button as="a" href="#" variant="ghost" icon={ArrowRight}>Back to Product Intro</Button>
-        </section>
-      </div>
+        </div>
+
+        <div className="role-entry-footer">
+          <span><ShieldCheck size={16} /> Frontend-only mock data</span>
+          <Button as="a" href="#landing" variant="ghost" size="sm">Back to Landing</Button>
+        </div>
+      </section>
     </main>
   );
 }

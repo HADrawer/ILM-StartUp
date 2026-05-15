@@ -1,54 +1,58 @@
-import { Calendar, ChevronRight, Filter } from 'lucide-react';
+import { CalendarClock, ClipboardCheck, Filter } from 'lucide-react';
 import AppShell from '../components/AppShell.jsx';
-
-const assignmentRows = [
-  { title: 'Binary Search Tree Implementation', course: 'Data Structures', due: 'May 16, 2026', points: '100 pts', priority: 'High', status: 'Not Started', color: 'red', actions: ['Start Assignment'] },
-  { title: 'Linear Regression Analysis', course: 'Machine Learning', due: 'May 18, 2026', points: '75 pts', priority: 'Medium', status: 'In Progress', color: 'yellow', actions: ['Continue Working', 'Submit'] },
-  { title: 'System Design Document', course: 'Software Engineering', due: 'May 24, 2026', points: '120 pts', priority: 'Low', status: 'Submitted', color: 'green', actions: ['View Submission'] }
-];
+import Button from '../components/Button.jsx';
+import DataTable from '../components/DataTable.jsx';
+import ListPanel from '../components/ListPanel.jsx';
+import ProgressBar from '../components/ProgressBar.jsx';
+import StatusBadge from '../components/StatusBadge.jsx';
+import { assignments } from '../data/mockData.js';
 
 export default function StudentAssignmentsPage(props) {
   return (
-    <AppShell {...props} title="Assignments">
-      <section className="ref-page">
-        <div className="ref-title-row">
-          <div>
-            <h1>Assignments</h1>
-            <div className="ref-tabs">
-              <button className="active">All</button>
-              <button>Pending</button>
-              <button>Submitted</button>
-              <button>Graded</button>
-            </div>
-          </div>
-          <div className="ref-filter-row">
-            <button><Filter size={16} /> Filter by Course</button>
-            <button><Calendar size={16} /> Filter by Date</button>
-          </div>
+    <AppShell {...props} title="Assignments" subtitle="A single view for drafts, submissions, due dates, weights, and feedback status.">
+      <section className="page-toolbar">
+        <div className="segmented-control" aria-label="Assignment filters">
+          <button className="active" type="button">All</button>
+          <button type="button">Open</button>
+          <button type="button">Submitted</button>
+          <button type="button">Reviewed</button>
         </div>
-        <div className="assignment-list">
-          {assignmentRows.map((item) => (
-            <article className={`assignment-wide ${item.color === 'red' ? 'featured' : ''}`} key={item.title}>
-              <span className={`dot ${item.color}`} />
-              <div className="assignment-main">
-                <h2>{item.title}</h2>
-                <p>{item.course}</p>
-                <div className="assignment-details">
-                  <span><small>Due Date</small>{item.due}<em>11:59 PM</em></span>
-                  <span><small>Points</small>{item.points}</span>
-                  <span><small>Priority</small><b className={item.color}>{item.priority}</b></span>
-                </div>
-                <div className="assignment-buttons">
-                  {item.actions.map((action, index) => <button className={index === 0 && item.color !== 'red' ? 'cyan' : ''} key={action}>{action}</button>)}
-                </div>
-              </div>
-              <div className="assignment-status">
-                <span>{item.status}</span>
-                <ChevronRight size={22} />
-              </div>
-            </article>
-          ))}
+        <div className="priority-actions">
+          <Button variant="control" icon={Filter}>Course Filter</Button>
+          <Button variant="control" icon={CalendarClock}>Due Date</Button>
         </div>
+      </section>
+
+      <section className="content-grid wide-left">
+        <ListPanel title="Assignment Queue" subtitle="Status, due date, and grade weight are shown together for fast scanning.">
+          <DataTable
+            columns={[
+              { key: 'title', label: 'Assignment' },
+              { key: 'course', label: 'Course' },
+              { key: 'due', label: 'Due' },
+              { key: 'weight', label: 'Weight' },
+              { key: 'status', label: 'Status', render: (row) => <StatusBadge tone={row.status === 'Reviewed' || row.status === 'Submitted' ? 'success' : row.progress < 40 ? 'warning' : 'info'}>{row.status}</StatusBadge> },
+              { key: 'progress', label: 'Progress', render: (row) => <ProgressBar value={row.progress} compact tone={row.progress < 40 ? 'gold' : 'teal'} /> }
+            ]}
+            rows={assignments}
+            getKey={(row) => `${row.course}-${row.title}`}
+          />
+        </ListPanel>
+
+        <ListPanel title="Next Best Actions" subtitle="Recognition-based shortcuts reduce hunting across course pages.">
+          <div className="stack-list">
+            {assignments.slice(0, 3).map((item) => (
+              <article className="readiness-card" key={item.title}>
+                <ClipboardCheck size={22} />
+                <div>
+                  <strong>{item.title}</strong>
+                  <p>{item.courseTitle} · Due {item.due}</p>
+                </div>
+                <Button as="a" href="#student/course/fintech-301" size="sm" variant="ghost">Open</Button>
+              </article>
+            ))}
+          </div>
+        </ListPanel>
       </section>
     </AppShell>
   );

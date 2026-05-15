@@ -4,7 +4,6 @@ import {
   BrainCircuit,
   BookOpen,
   Calendar,
-  ClipboardCheck,
   FileSearch,
   FileText,
   Grid2X2,
@@ -32,7 +31,6 @@ const nav = {
   doctor: [
     ['Dashboard', '#doctor/dashboard', Grid2X2, 'dashboard'],
     ['Courses', '#doctor/course/fintech-301', BookOpen, 'course'],
-    ['Submissions', '#doctor/dashboard', ClipboardCheck, 'submissions'],
     ['AI Detector', '#doctor/detector', FileSearch],
     ['AI Generator', '#doctor/generator', Sparkles],
     ['Secure Exams', '#doctor/exam', Shield],
@@ -47,12 +45,12 @@ export default function Sidebar({ role, page }) {
 
   return (
     <aside className="sidebar">
-      <Brand />
+      <Brand role={role} />
       <nav className="side-nav" aria-label={`${role} navigation`}>
         {nav[role].map(([label, href, Icon, routeKey]) => {
           const active = routeKey ? routeKey === page || (routeKey === 'exams' && page === 'exam') || (routeKey === 'courses' && page === 'course') : href.includes(`/${page}`);
           return (
-            <a className={active ? 'active' : ''} href={href} key={label}>
+            <a className={active ? 'active' : ''} href={href} key={label} aria-current={active ? 'page' : undefined}>
               <Icon size={18} />
               {label}
             </a>
@@ -63,6 +61,7 @@ export default function Sidebar({ role, page }) {
         <div className="avatar">{user.avatar}</div>
         <div>
           <strong>{user.name}</strong>
+          <span>{user.university}</span>
           <small>{user.email}</small>
         </div>
       </div>
