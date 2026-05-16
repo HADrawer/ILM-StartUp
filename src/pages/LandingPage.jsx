@@ -32,7 +32,7 @@ export default function LandingPage() {
       <iframe
         ref={iframeRef}
         className="provided-landing-frame"
-        src="/ilm.html"
+        src={`${import.meta.env.BASE_URL}ilm.html`}
         title="ILM landing page"
         onLoad={attachLoginBehavior}
       />
