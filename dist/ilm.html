@@ -486,7 +486,7 @@
 
     /* ─── Comparison ────────────────────────────────────────────── */
     .comparison { background: var(--cream); }
-    .comparison-table-wrap { overflow-x: auto; margin-top: 48px; border-radius: var(--radius); }
+    .comparison-table-wrap { overflow-x: hidden; margin-top: 48px; border-radius: var(--radius); }
     .comparison-table {
       width: 100%; border-collapse: collapse;
       background: var(--white); border-radius: var(--radius);
@@ -770,7 +770,12 @@
     }
     .mobile-menu a:last-child { border-bottom: none; }
 
-    /* ─── Responsive ────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       PC / DESKTOP  —  base styles above apply to all screens
+       above 640 px. Nothing in this block needs to change.
+       ════════════════════════════════════════════════════════ */
+
+    /* ─── General responsive (tablet / small screens) ──────── */
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 64px 0; }
       .hero-visual { display: none; }
@@ -782,6 +787,7 @@
       .testimonials-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
+
     @media (max-width: 768px) {
       .section { padding: 72px 0; }
       .nav-links { display: none; }
@@ -796,6 +802,45 @@
       .logos-track { gap: 20px; }
       .hero-stats { gap: 24px; flex-wrap: wrap; }
       .security-items { gap: 28px; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       PHONE ONLY  —  comparison section fixes (max 640 px)
+       PC styles above are completely untouched.
+       Only the layout clipping bug and table scroll are fixed.
+       ════════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      /* ── Comparison section: fix viewport-centering clip ── */
+      .comparison.section {
+        min-height: unset;
+        justify-content: flex-start;
+        padding: 72px 0;
+      }
+
+      /* ── Shrink title + subtitle to match phone scale ── */
+      .comparison .section-title { font-size: clamp(15px, 4vw, 20px); margin-bottom: 8px; }
+      .comparison .section-sub   { font-size: 11px; }
+
+      /* ── Shrink table cells, text, and icons ── */
+      .comparison .comparison-table th { padding: 5px 7px; font-size: 9px; }
+      .comparison .comparison-table td { padding: 5px 7px; font-size: 9px; }
+      .comparison .check  { font-size: 11px; }
+      .comparison .cross  { font-size: 11px; }
+      .comparison .partial { font-size: 8px; }
+      /* Pricing row: override inline font-size and clean up the subtext */
+      .comparison .comparison-table td[style] { font-size: 9px !important; }
+      .comparison .comparison-table td span[style] { font-size: 8px !important; display: block; margin-top: 2px; }
+      .comparison .comparison-table td br { display: none; }
+
+      /* ── Table: swipe left-right, scrollbar hidden ── */
+      .comparison .comparison-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .comparison .comparison-table-wrap::-webkit-scrollbar { display: none; }
+      .comparison-table { min-width: 340px; }
     }
   </style>
 </head>
