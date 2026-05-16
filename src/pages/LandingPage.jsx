@@ -16,7 +16,7 @@ export default function LandingPage() {
     const doc = frame?.contentDocument;
     if (!doc) return;
 
-    const buttons = doc.querySelectorAll('.nav-demo-btn');
+    const buttons = doc.querySelectorAll('.nav-demo-btn, .cta-demo-btn');
     buttons.forEach((button) => {
       button.addEventListener('click', openRoleChoice, true);
       button.onclick = null;

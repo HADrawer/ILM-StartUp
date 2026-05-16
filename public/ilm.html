@@ -540,7 +540,7 @@
       flex-direction: column;
       justify-content: center;
       position: relative;
-      overflow: hidden;
+      overflow-x: clip;
     }
     .comparison .container { position: relative; z-index: 2; }
     .comparison .section-title { font-size: clamp(22px, 3vw, 36px); margin-bottom: 10px; }
@@ -551,6 +551,62 @@
     .comparison .check { font-size: 17px; }
     .comparison .cross { font-size: 17px; }
     .comparison .partial { font-size: 13px; }
+
+    /* ─── Comparison Table Responsive ───────────────────────── */
+    .comparison-table { min-width: 560px; }
+    .scroll-hint {
+      display: none;
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .comparison-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: var(--radius);
+        position: relative;
+      }
+      .comparison-table-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0;
+        width: 40px;
+        background: linear-gradient(to right, transparent, rgba(246,231,188,0.7));
+        pointer-events: none;
+        border-radius: 0 var(--radius) var(--radius) 0;
+      }
+      .comparison-table {
+        min-width: 520px;
+      }
+      .comparison-table th:first-child,
+      .comparison-table td:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background: var(--white);
+        box-shadow: 2px 0 6px rgba(11,45,114,0.08);
+        min-width: 130px;
+      }
+      .comparison-table th.regular:first-child {
+        background: var(--gray-50);
+      }
+      .scroll-hint { display: block; }
+    }
+
+    @media (max-width: 480px) {
+      .comparison-table { min-width: 460px; }
+      .comparison-table th { padding: 10px 10px; font-size: 11px; }
+      .comparison-table td { padding: 10px 10px; font-size: 11px; }
+      .comparison-table th:first-child,
+      .comparison-table td:first-child { min-width: 110px; }
+      .check { font-size: 15px; }
+      .cross { font-size: 15px; }
+      .partial { font-size: 10px; }
+    }
 
     /* ─── Solution / How It Works ───────────────────────────────── */
     .solution { background: var(--white); position: relative; }
@@ -771,31 +827,119 @@
     .mobile-menu a:last-child { border-bottom: none; }
 
     /* ─── Responsive ────────────────────────────────────────────── */
+
+    /* Tablet landscape / small desktop */
     @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 64px 0; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; }
       .hero-visual { display: none; }
-      .problem-grid, .trust-grid, .ai-grid { grid-template-columns: 1fr; gap: 40px; }
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .features-top-row { grid-template-columns: 1fr 1fr; }
-      .solution-steps { grid-template-columns: 1fr 1fr; }
+      .trust-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ai-grid { grid-template-columns: 1fr; gap: 32px; }
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .features-top-row { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .solution-steps { grid-template-columns: 1fr 1fr; gap: 28px; }
       .solution-steps::before { display: none; }
-      .testimonials-grid { grid-template-columns: 1fr 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .steps-zigzag { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .problem-cards-grid { grid-template-columns: 1fr 1fr; }
+      .hero-sub { font-size: 16px; }
+      .section-sub { font-size: 16px; }
+      .cta-section { padding: 80px 0; }
     }
+
+    /* Tablet portrait */
     @media (max-width: 768px) {
-      .section { padding: 72px 0; }
+      .container { padding: 0 20px; }
+      .section { padding: 64px 0; }
+      .section-sm { padding: 48px 0; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .features-grid { grid-template-columns: 1fr; }
-      .features-top-row { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .solution-steps { grid-template-columns: 1fr; }
+      .nav-demo-btn { padding: 8px 14px; font-size: 12px; }
+      .hero { min-height: auto; padding-bottom: 60px; }
+      .hero-inner { padding: 48px 0 40px; gap: 32px; }
+      .hero-title { font-size: clamp(26px, 6vw, 36px); }
+      .hero-sub { font-size: 15px; margin-bottom: 28px; }
+      .hero-stats { gap: 20px; flex-wrap: wrap; margin-top: 32px; padding-top: 28px; }
+      .hero-stat-value { font-size: 22px; }
+      .btn-group { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .btn-lg { padding: 14px 28px; font-size: 15px; width: 100%; justify-content: center; }
+      .features-grid { grid-template-columns: 1fr; gap: 16px; }
+      .features-top-row { grid-template-columns: 1fr; gap: 16px; }
+      .problem-cards-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
+      .solution-steps { grid-template-columns: 1fr; gap: 20px; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .logos-track { gap: 20px; }
-      .hero-stats { gap: 24px; flex-wrap: wrap; }
-      .security-items { gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+      .footer-socials { justify-content: center; }
+      .logos-track { gap: 12px; }
+      .logo-pill { padding: 8px 16px; font-size: 12px; }
+      .security-items { gap: 20px; flex-direction: column; align-items: center; text-align: center; }
+      .cta-section { padding: 64px 0; }
+      .cta-title { font-size: clamp(28px, 7vw, 42px); }
+      .cta-sub { font-size: 15px; }
+      .cta-buttons { flex-direction: column; align-items: center; gap: 12px; }
+      .cta-buttons .btn { width: 100%; max-width: 320px; justify-content: center; }
+      .comparison-table th { padding: 12px 14px; font-size: 13px; }
+      .comparison-table td { padding: 11px 14px; font-size: 13px; }
+      .section-title { font-size: clamp(24px, 5.5vw, 36px); }
+      .section-sub { font-size: 14px; }
+      .trust-grid { gap: 28px; }
+      .ai-grid { gap: 24px; margin-top: 36px; }
+      .ai-tool-card { padding: 24px; }
+      .feature-card { padding: 22px; }
+      .testimonial-card { padding: 24px; }
+      .step-card { padding: 24px 16px; }
+      .trust-card { padding: 18px 20px; }
+      .problem-card { padding: 16px 18px; }
+    }
+
+    /* Mobile phones */
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .section { padding: 52px 0; }
+      .nav-inner { height: 60px; }
+      .mobile-menu { top: 60px; }
+      .nav-logo-text { font-size: 18px; }
+      .nav-logo-mark { width: 32px; height: 32px; }
+      .nav-demo-btn { display: none; }
+      .hero-inner { padding: 40px 0 32px; }
+      .hero-title { font-size: clamp(24px, 7.5vw, 32px); }
+      .hero-sub { font-size: 14px; max-width: 100%; }
+      .hero-stats { gap: 16px; }
+      .hero-stat-value { font-size: 20px; }
+      .hero-stat-label { font-size: 12px; }
+      .badge { font-size: 11px; padding: 5px 12px; }
+      .section-title { font-size: clamp(22px, 7vw, 30px); }
+      .section-sub { font-size: 13px; }
+      .section-label { font-size: 11px; }
+      .btn { padding: 12px 22px; font-size: 14px; }
+      .btn-lg { padding: 13px 22px; font-size: 14px; }
+      .features-grid { gap: 12px; }
+      .feature-card { padding: 18px; }
+      .feature-title { font-size: 15px; }
+      .feature-text { font-size: 13px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .logos-track { gap: 10px; }
+      .logo-pill { padding: 7px 12px; font-size: 11px; gap: 6px; }
+      .comparison-table th { padding: 10px 10px; font-size: 12px; }
+      .comparison-table td { padding: 10px 10px; font-size: 12px; }
+      .cta-section { padding: 52px 0; }
+      .cta-title { font-size: clamp(24px, 8vw, 36px); letter-spacing: -0.5px; }
+      .cta-sub { font-size: 14px; }
+      .security-bar { padding: 36px 0; }
+      .security-item-text { font-size: 13px; }
+      .testimonial-card { padding: 20px; }
+      .testimonial-text { font-size: 14px; }
+      .ai-tool-card { padding: 20px; }
+      .ai-tool-title { font-size: 17px; }
+      .step-card { padding: 20px 14px; }
+      .step-title { font-size: 15px; }
+      .trust-card { padding: 16px 18px; }
+      .problem-card { padding: 14px 16px; }
+      .problem-card-title { font-size: 13px; }
+      .footer { padding: 48px 0 24px; }
+      .footer-bottom { padding-top: 20px; }
     }
   </style>
 </head>
@@ -821,8 +965,8 @@
             <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
             <button class="lang-btn" id="lang-ar" onclick="setLang('ar')">ع</button>
           </div>
-          <button class="nav-demo-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
-            <span class="en-text">Book a Demo</span>
+          <button class="nav-demo-btn" onclick="window.open('./index.html','_blank')">
+            <span class="en-text">Review the Demo</span>
             <span class="ar-text">احجز عرضاً</span>
           </button>
           <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -839,7 +983,7 @@
     <a href="#comparison" onclick="toggleMenu()"><span class="en-text">Compare</span><span class="ar-text">مقارنة</span></a>
     <a href="#ai-tools" onclick="toggleMenu()"><span class="en-text">AI Tools</span><span class="ar-text">أدوات الذكاء</span></a>
     <a href="#local-trust" onclick="toggleMenu()"><span class="en-text">GCC Focus</span><span class="ar-text">دول الخليج</span></a>
-    <a href="#cta" onclick="toggleMenu()"><span class="en-text">Book a Demo</span><span class="ar-text">احجز عرضاً</span></a>
+    <a href="./index.html" target="_blank" onclick="toggleMenu()"><span class="en-text">Review the Demo</span><span class="ar-text">احجز عرضاً</span></a>
   </div>
 
   <!-- ════════════════════ HERO ════════════════════ -->
@@ -1293,6 +1437,7 @@
           </tbody>
         </table>
       </div>
+      <p class="scroll-hint">← swipe to see all platforms →</p>
       <p style="margin-top:16px; font-size:13px; color:var(--gray-600); text-align:center;">
         * Secure exam lockdown is available as an add-on for <strong>30,000 BHD/year</strong>.
       </p>
@@ -1415,8 +1560,8 @@
         <span class="ar-text">انضم إلى قائمة الانتظار أو احجز عرضاً مخصصاً مع فريقنا المحلي. لا التزام مطلوب — مجرد محادثة.</span>
       </p>
       <div class="cta-buttons">
-        <a href="mailto:hello@ilm.bh" class="btn btn-navy btn-lg">
-          <span class="en-text">Book a Demo</span>
+        <a href="./index.html" target="_blank" class="btn btn-navy btn-lg cta-demo-btn">
+          <span class="en-text">Review the Demo</span>
           <span class="ar-text">احجز عرضاً توضيحياً</span>
         </a>
         <a href="mailto:hello@ilm.bh" class="btn btn-outline btn-lg">
