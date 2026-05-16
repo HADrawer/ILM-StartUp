@@ -404,6 +404,91 @@ textarea {
 }
 
 /* Landing and role entry */
+.provided-landing-shell {
+  background: #ffffff;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.provided-landing-frame {
+  border: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.provided-role-overlay {
+  align-items: center;
+  background: rgba(6, 26, 51, 0.62);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: var(--space-5);
+  position: fixed;
+  z-index: 50;
+}
+
+.provided-role-modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  max-width: 460px;
+  padding: var(--space-8);
+  position: relative;
+  width: 100%;
+}
+
+.provided-role-modal h2 {
+  color: var(--navy-900);
+  font-size: 28px;
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
+}
+
+.provided-role-modal p {
+  color: var(--gray-600);
+  margin-bottom: var(--space-5);
+}
+
+.provided-role-close {
+  align-items: center;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--gray-700);
+  cursor: pointer;
+  display: flex;
+  font-size: 24px;
+  height: 38px;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 38px;
+}
+
+.provided-role-actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.provided-role-actions button {
+  background: var(--navy-900);
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  cursor: pointer;
+  font-weight: 900;
+  min-height: 48px;
+  padding: 12px 16px;
+}
+
+.provided-role-actions button:first-child {
+  background: var(--teal-600);
+}
+
 .landing-page,
 .role-entry {
   background: var(--white);

@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ILM — The Future of Learning Platforms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── CSS Custom Properties ─────────────────────────────────── */
+    :root {
+      --navy:   #0B2D72;
+      --blue:   #0992C2;
+      --cyan:   #0AC4E0;
+      --cream:  #F6E7BC;
+      --white:  #FFFFFF;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-600: #475569;
+      --gray-800: #1E293B;
+      --font-en: 'Inter', sans-serif;
+      --font-ar: 'Cairo', sans-serif;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(11,45,114,0.12);
+      --shadow-lg: 0 16px 48px rgba(11,45,114,0.18);
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ─── Reset & Base ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-en);
+      background: var(--white);
+      color: var(--gray-800);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body[lang="ar"] {
+      font-family: var(--font-ar);
+      direction: rtl;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .en-text { display: block; }
+    .ar-text { display: none; }
+    body[lang="ar"] .en-text { display: none; }
+    body[lang="ar"] .ar-text { display: block; }
+
+    /* ─── Utility ────────────────────────────────────────────────── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-sm { padding: 64px 0; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(10,196,224,0.12);
+      color: var(--cyan);
+      border: 1px solid rgba(10,196,224,0.3);
+      padding: 6px 16px; border-radius: 999px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.5; transform:scale(1.4); }
+    }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px,4vw,44px); font-weight: 800;
+      line-height: 1.15; color: var(--navy); margin-bottom: 20px;
+    }
+    .section-title.light { color: var(--white); }
+    .section-sub {
+      font-size: 18px; color: var(--gray-600); max-width: 600px;
+      line-height: 1.7;
+    }
+    .section-sub.light { color: rgba(246,231,188,0.85); }
+    .text-center { text-align: center; }
+    .text-center .section-sub { margin: 0 auto; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .flex-center { display: flex; align-items: center; justify-content: center; }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; }
+    .gap-4 { gap: 16px; }
+    .gap-3 { gap: 12px; }
+
+    /* ─── Buttons ────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: var(--radius-sm);
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: all var(--transition); border: 2px solid transparent;
+      white-space: nowrap; font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--cyan); color: var(--navy);
+    }
+    .btn-primary:hover {
+      background: #08afc9; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(10,196,224,0.4);
+    }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border-color: rgba(255,255,255,0.35);
+    }
+    .btn-outline:hover {
+      border-color: var(--cyan); color: var(--cyan);
+      background: rgba(10,196,224,0.08);
+    }
+    .btn-navy {
+      background: var(--navy); color: var(--white);
+    }
+    .btn-navy:hover {
+      background: #0a2560; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(11,45,114,0.35);
+    }
+    .btn-cream {
+      background: var(--cream); color: var(--navy);
+    }
+    .btn-cream:hover {
+      background: #eeda9d; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(246,231,188,0.4);
+    }
+    .btn-lg { padding: 17px 36px; font-size: 16px; border-radius: 10px; }
+    .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ─── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(11,45,114,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(10,196,224,0.12);
+      transition: all var(--transition);
+    }
+    .navbar.scrolled {
+      background: rgba(11,45,114,0.99);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-mark {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .nav-logo-mark img {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    .nav-logo-text {
+      font-size: 20px; font-weight: 800; color: var(--white);
+      letter-spacing: -0.3px;
+    }
+    .nav-logo-text span { color: var(--cyan); }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 500;
+      transition: color var(--transition); position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--cyan); transform: scaleX(0);
+      transition: transform var(--transition); border-radius: 2px;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .lang-toggle {
+      display: flex; align-items: center; gap: 2px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px; padding: 3px;
+    }
+    .lang-btn {
+      padding: 5px 12px; border-radius: 6px; font-size: 13px;
+      font-weight: 600; cursor: pointer; border: none;
+      background: transparent; color: rgba(255,255,255,0.6);
+      transition: all var(--transition); font-family: inherit;
+    }
+    .lang-btn.active {
+      background: var(--cyan); color: var(--navy);
+    }
+    .nav-demo-btn {
+      padding: 9px 20px; border-radius: 8px; font-size: 13px;
+      font-weight: 600; background: var(--cyan); color: var(--navy);
+      border: none; cursor: pointer; font-family: inherit;
+      transition: all var(--transition);
+    }
+    .nav-demo-btn:hover {
+      background: #08afc9; transform: translateY(-1px);
+    }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, var(--navy) 0%, #0d3480 55%, #0a2060 100%);
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: 68px; position: relative; overflow: hidden;
+      border-bottom: 3px solid var(--cream);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(10,196,224,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(9,146,194,0.1) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-inner {
+      position: relative; z-index: 3;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center; padding: 80px 0 80px;
+    }
+    .hero-content {}
+    .hero-badge { margin-bottom: 28px; }
+    .hero-title {
+      font-size: clamp(28px, 3.8vw, 48px); font-weight: 800;
+      line-height: 1.15; color: var(--white); margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero-sub {
+      font-size: 18px; color: rgba(246,231,188,0.8);
+      line-height: 1.75; margin-bottom: 40px; max-width: 480px;
+    }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 48px;
+      padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat {}
+    .hero-stat-value {
+      font-size: 28px; font-weight: 800; color: var(--cyan);
+    }
+    .hero-stat-label {
+      font-size: 13px; color: rgba(246,231,188,0.7); margin-top: 2px;
+    }
+    .hero-visual {
+      position: relative; display: flex; justify-content: center;
+    }
+    .hero-card-stack {
+      position: relative; width: 100%; max-width: 480px;
+    }
+    .mock-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 28px;
+      box-shadow: var(--shadow-lg);
+    }
+    .mock-card-main {
+      position: relative; z-index: 2;
+    }
+    .mock-card-float {
+      position: absolute; z-index: 3;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(10,196,224,0.2);
+      border-radius: 14px; padding: 16px 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .mock-card-float.top-right {
+      top: -24px; right: -24px; animation-delay: 0s;
+    }
+    .mock-card-float.bottom-left {
+      bottom: -24px; left: -24px; animation-delay: 2s;
+    }
+    .mock-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .mock-avatar {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--white);
+      overflow: hidden; flex-shrink: 0;
+    }
+    .mock-avatar img {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    .mock-title { font-size: 14px; font-weight: 600; color: var(--white); }
+    .mock-sub { font-size: 12px; color: rgba(246,231,188,0.6); }
+    .mock-bars { display: flex; flex-direction: column; gap: 10px; }
+    .mock-bar {
+      height: 8px; border-radius: 4px;
+      background: rgba(255,255,255,0.12);
+    }
+    .mock-bar.fill-cyan { background: linear-gradient(90deg,var(--cyan),var(--blue)); }
+    .mock-bar.fill-75 { width: 75%; }
+    .mock-bar.fill-55 { width: 55%; }
+    .mock-bar.fill-85 { width: 85%; }
+    .mock-bar.fill-40 { width: 40%; }
+    .mock-modules {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;
+    }
+    .mock-module {
+      background: rgba(10,196,224,0.1); border: 1px solid rgba(10,196,224,0.2);
+      border-radius: 10px; padding: 12px 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .mock-module-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(10,196,224,0.2); display: flex;
+      align-items: center; justify-content: center; font-size: 14px;
+    }
+    .mock-module-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85); }
+    .float-stat { text-align: center; }
+    .float-stat-value { font-size: 22px; font-weight: 800; color: var(--cyan); }
+    .float-stat-label { font-size: 11px; color: rgba(246,231,188,0.7); margin-top: 2px; }
+    .float-badge {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .float-badge-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg,var(--cyan),var(--blue));
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .float-badge-text { font-size: 12px; font-weight: 600; color: var(--white); }
+    .float-badge-sub { font-size: 10px; color: rgba(246,231,188,0.6); }
+
+    /* ─── Section Belt Divider ──────────────────────────────────── */
+    .cream-band { height: 32px; background: var(--cream); }
+
+
+    /* ─── Logos Bar ─────────────────────────────────────────────── */
+    .logos-bar {
+      background: var(--cream);
+      padding: 28px 0;
+      border-top: 1px solid rgba(11,45,114,0.08);
+    }
+    .logos-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--navy); opacity: 0.5;
+      text-align: center; margin-bottom: 20px;
+    }
+    .logos-track {
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px; flex-wrap: wrap;
+    }
+    .logo-pill {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(11,45,114,0.06); border: 1px solid rgba(11,45,114,0.1);
+      padding: 10px 22px; border-radius: 999px;
+      font-weight: 700; font-size: 14px; color: var(--navy); opacity: 0.7;
+    }
+    .logo-pill-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue);
+    }
+
+    /* ─── Problem Section ───────────────────────────────────────── */
+    .problem { background: var(--white); position: relative; }
+    .problem.section {
+      padding: 0; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .problem-header { text-align: center; margin-bottom: 20px; }
+    .problem .section-title { font-size: clamp(20px, 2.8vw, 30px); margin-bottom: 8px; }
+    .problem .section-sub { font-size: 14px; }
+    .problem-cards-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .problem-card {
+      border: 1px solid var(--gray-200); border-radius: 14px;
+      padding: 18px 20px; background: var(--white);
+      transition: all var(--transition); position: relative; overflow: hidden;
+    }
+    .problem-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, var(--navy), var(--blue));
+      transform: scaleX(0); transition: transform var(--transition);
+      transform-origin: left;
+    }
+    .problem-card:hover::after { transform: scaleX(1); }
+    .problem-card:hover {
+      border-color: rgba(9,146,194,0.25);
+      box-shadow: 0 8px 32px rgba(11,45,114,0.09);
+      transform: translateY(-3px);
+    }
+    .problem-card-icon { font-size: 24px; margin-bottom: 8px; }
+    .problem-card-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .problem-card-text { font-size: 12px; color: var(--gray-600); line-height: 1.55; margin-bottom: 10px; }
+    .problem-card-bullets {
+      display: flex; flex-direction: column; gap: 5px;
+      padding-top: 10px; border-top: 1px solid var(--gray-100);
+    }
+    .problem-card-bullet {
+      display: flex; align-items: flex-start; gap: 7px;
+      font-size: 11px; color: var(--gray-600); line-height: 1.45;
+    }
+    .problem-card-bullet::before {
+      content: ''; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--blue); flex-shrink: 0; margin-top: 5px;
+    }
+    /* ─── Features Section ──────────────────────────────────────── */
+    .features { background: var(--navy); overflow: hidden; position: relative;
+      border-top: 3px solid var(--cream); border-bottom: 3px solid var(--cream); }
+    .features::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 60% at 80% 20%, rgba(10,196,224,0.08) 0%, transparent 70%);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px; position: relative; z-index: 1;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px; padding: 32px;
+      transition: all var(--transition); cursor: default;
+    }
+    .feature-card:hover {
+      background: rgba(10,196,224,0.06);
+      border-color: rgba(10,196,224,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+    }
+    .feature-card.featured {
+      background: linear-gradient(135deg, rgba(10,196,224,0.12), rgba(9,146,194,0.08));
+      border-color: rgba(10,196,224,0.25);
+      grid-column: span 1;
+    }
+    .feature-icon {
+      width: 56px; height: 56px; border-radius: 14px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+      background: linear-gradient(135deg, rgba(10,196,224,0.15), rgba(9,146,194,0.1));
+      border: 1px solid rgba(10,196,224,0.2);
+    }
+    .feature-title { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+    .feature-text { font-size: 14px; color: rgba(246,231,188,0.7); line-height: 1.7; }
+    .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .feature-tag {
+      background: rgba(10,196,224,0.1); border: 1px solid rgba(10,196,224,0.2);
+      color: var(--cyan); padding: 4px 12px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .features-top-row { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+
+    /* ─── Features: full-viewport compact layout ─────────────── */
+    .features.section {
+      padding: 40px 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .features .features-grid { gap: 16px; }
+    .features .feature-card { padding: 18px 20px; }
+    .features .feature-icon { width: 42px; height: 42px; font-size: 19px; margin-bottom: 10px; }
+    .features .feature-title { font-size: 16px; margin-bottom: 6px; }
+    .features .feature-tags { margin-top: 10px; }
+    .features .section-sub { font-size: 15px; }
+
+    /* ─── Comparison ────────────────────────────────────────────── */
+    .comparison { background: var(--cream); }
+    .comparison-table-wrap { overflow-x: auto; margin-top: 48px; border-radius: var(--radius); }
+    .comparison-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+    .comparison-table th {
+      padding: 20px 24px; text-align: left; font-size: 14px;
+      font-weight: 700; border-bottom: 2px solid var(--gray-100);
+    }
+    body[lang="ar"] .comparison-table th,
+    body[lang="ar"] .comparison-table td { text-align: right; }
+    .comparison-table th.highlight { background: var(--navy); color: var(--white); }
+    .comparison-table th.regular { background: var(--gray-50); color: var(--gray-600); }
+    .comparison-table td {
+      padding: 18px 24px; font-size: 14px; color: var(--gray-600);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .comparison-table td.feature-name { font-weight: 600; color: var(--navy); }
+    .comparison-table td.ilm-col { background: rgba(10,196,224,0.04); font-weight: 600; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table tr:hover td { background: rgba(11,45,114,0.02); }
+    .comparison-table tr:hover td.ilm-col { background: rgba(10,196,224,0.06); }
+    .check { color: #16A34A; font-size: 18px; }
+    .cross { color: #DC2626; font-size: 18px; }
+    .partial { color: #CA8A04; font-size: 14px; font-weight: 600; }
+
+    /* ─── Falling Leaves ────────────────────────────────────── */
+    @keyframes leaf-fall {
+      0%   { transform: translateY(-60px) translateX(0px)   rotate(0deg);   opacity: 0; }
+      10%  { opacity: 0.65; }
+      25%  { transform: translateY(25vh)  translateX(28px)  rotate(90deg); }
+      50%  { transform: translateY(50vh)  translateX(-18px) rotate(195deg); }
+      75%  { transform: translateY(75vh)  translateX(22px)  rotate(275deg); }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(108vh) translateX(0px)   rotate(360deg); opacity: 0; }
+    }
+    .falling-leaf {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 0 60% 0 60%;
+      opacity: 0;
+      animation: leaf-fall linear infinite;
+    }
+
+    /* ─── Comparison: full-viewport layout ──────────────────── */
+    .comparison.section {
+      padding: 52px 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .comparison .container { position: relative; z-index: 2; }
+    .comparison .section-title { font-size: clamp(22px, 3vw, 36px); margin-bottom: 10px; }
+    .comparison .section-sub { font-size: 15px; margin-bottom: 0; }
+    .comparison .comparison-table-wrap { margin-top: 28px; }
+    .comparison .comparison-table th { padding: 15px 22px; font-size: 14px; }
+    .comparison .comparison-table td { padding: 13px 22px; font-size: 14px; }
+    .comparison .check { font-size: 17px; }
+    .comparison .cross { font-size: 17px; }
+    .comparison .partial { font-size: 13px; }
+
+    /* ─── Solution / How It Works ───────────────────────────────── */
+    .solution { background: var(--white); position: relative; }
+    .solution-steps {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 40px;
+      margin-top: 56px; position: relative;
+    }
+    .solution-steps::before { display: none; }
+    .steps-zigzag {
+      position: absolute; top: 50%; left: 80px;
+      transform: translateY(-50%);
+      width: calc(100% - 160px); height: 10px;
+      z-index: 0; overflow: visible;
+    }
+    .step-card {
+      position: relative; z-index: 1; text-align: center; padding: 32px 20px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 20px; transition: all var(--transition);
+    }
+    .step-card:hover {
+      border-color: var(--cyan); transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .step-number {
+      width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--navy); color: var(--cyan);
+      font-size: 20px; font-weight: 800; border: 3px solid var(--cream);
+    }
+    .step-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step-text { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+    /* ─── Local Trust ───────────────────────────────────────────── */
+    .local-trust {
+      background: linear-gradient(160deg, #0a2868 0%, var(--blue) 100%);
+      position: relative; overflow: hidden;
+      border-top: 3px solid var(--cream); border-bottom: 3px solid var(--cream);
+    }
+    .local-trust::before {
+      content: ''; position: absolute;
+      top: -100px; right: -100px; width: 400px; height: 400px;
+      border-radius: 50%; background: rgba(10,196,224,0.08);
+    }
+    .trust-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .trust-cards { display: flex; flex-direction: column; gap: 16px; }
+    .trust-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius); padding: 24px 28px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: all var(--transition);
+    }
+    .trust-card:hover {
+      border-color: rgba(10,196,224,0.3);
+      background: rgba(255,255,255,0.09);
+    }
+    .trust-card-icon {
+      width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
+      background: rgba(10,196,224,0.15); display: flex;
+      align-items: center; justify-content: center; font-size: 20px;
+    }
+    .trust-card-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .trust-card-text { font-size: 13px; color: rgba(246,231,188,0.75); line-height: 1.6; }
+
+    /* ─── AI Tools ──────────────────────────────────────────────── */
+    .ai-tools { background: var(--cream); }
+    .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 56px; align-items: start; }
+    .ai-tool-card {
+      background: var(--white); border: 1px solid rgba(11,45,114,0.1);
+      border-radius: 20px; padding: 36px; transition: all var(--transition);
+    }
+    .ai-tool-card:hover {
+      border-color: var(--blue); transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .ai-tool-icon {
+      width: 60px; height: 60px; border-radius: 14px; margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      display: flex; align-items: center; justify-content: center; font-size: 26px;
+    }
+    .ai-tool-title { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .ai-tool-text { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 20px; }
+    .ai-feature-list { display: flex; flex-direction: column; gap: 10px; }
+    .ai-feature-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--gray-600);
+    }
+    .ai-feature-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); flex-shrink: 0;
+    }
+
+    /* ─── Testimonials ──────────────────────────────────────────── */
+    .testimonials { background: #F6E7BC; }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+      margin-top: 48px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(11,45,114,0.1);
+      border-radius: 20px; padding: 32px;
+      transition: all var(--transition);
+    }
+    .testimonial-card:hover {
+      border-color: rgba(11,45,114,0.25);
+      background: rgba(255,255,255,0.85);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(11,45,114,0.1);
+    }
+    .testimonial-quote {
+      font-size: 32px; color: var(--navy); line-height: 1; margin-bottom: 12px;
+    }
+    .testimonial-text {
+      font-size: 15px; color: var(--gray-800); line-height: 1.75;
+      font-style: italic; margin-bottom: 24px;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg,var(--navy),var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--white); font-size: 14px;
+    }
+    .testimonial-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .testimonial-role { font-size: 12px; color: var(--gray-600); }
+    .testimonials .section-title { color: var(--navy); }
+
+    /* ─── CTA Section ───────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--blue) 60%, var(--navy) 100%);
+      padding: 100px 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(246,231,188,0.06) 0%, transparent 70%);
+    }
+    .cta-title {
+      font-size: clamp(32px,5vw,52px); font-weight: 900; color: var(--white);
+      line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px;
+      position: relative;
+    }
+    .cta-sub {
+      font-size: 18px; color: rgba(246,231,188,0.85);
+      max-width: 520px; margin: 0 auto 40px; line-height: 1.7;
+      position: relative;
+    }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+    /* ─── Security / Compliance ─────────────────────────────────── */
+    .security-bar {
+      background: var(--cream); padding: 48px 0;
+      border-top: 1px solid rgba(11,45,114,0.08);
+    }
+    .security-items {
+      display: flex; justify-content: center; gap: 56px; flex-wrap: wrap;
+    }
+    .security-item { display: flex; align-items: center; gap: 12px; }
+    .security-item-icon { font-size: 22px; }
+    .security-item-text { font-size: 14px; font-weight: 600; color: var(--navy); }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    .footer {
+      background: var(--navy); padding: 64px 0 32px;
+      border-top: 1px solid rgba(10,196,224,0.1);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-text {
+      font-size: 14px; color: rgba(246,231,188,0.65); line-height: 1.75;
+      margin-top: 16px; max-width: 280px;
+    }
+    .footer-col-title {
+      font-size: 12px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 20px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a {
+      font-size: 14px; color: rgba(246,231,188,0.65); transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px; display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy { font-size: 13px; color: rgba(246,231,188,0.4); }
+    .footer-socials { display: flex; gap: 12px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: rgba(255,255,255,0.6);
+      transition: all var(--transition); cursor: pointer;
+    }
+    .social-btn:hover {
+      background: rgba(10,196,224,0.15); border-color: rgba(10,196,224,0.3);
+      color: var(--cyan);
+    }
+
+    /* ─── Mobile Menu ───────────────────────────────────────────── */
+    .mobile-menu {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      background: rgba(11,45,114,0.98); backdrop-filter: blur(16px);
+      z-index: 998; padding: 24px; flex-direction: column; gap: 16px;
+      border-bottom: 1px solid rgba(10,196,224,0.15);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.8); font-size: 16px; font-weight: 500;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ─── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 64px 0; }
+      .hero-visual { display: none; }
+      .problem-grid, .trust-grid, .ai-grid { grid-template-columns: 1fr; gap: 40px; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .features-top-row { grid-template-columns: 1fr 1fr; }
+      .solution-steps { grid-template-columns: 1fr 1fr; }
+      .solution-steps::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .features-grid { grid-template-columns: 1fr; }
+      .features-top-row { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .solution-steps { grid-template-columns: 1fr; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .logos-track { gap: 20px; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .security-items { gap: 28px; }
+    }
+  </style>
+</head>
+<body lang="en">
+
+  <!-- ════════════════════ NAVBAR ════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-mark"><img src="logo.jpeg" alt="ILM logo"/></div>
+          <div class="nav-logo-text">IL<span>M</span></div>
+        </a>
+        <div class="nav-links">
+          <a href="#features"><span class="en-text">Features</span><span class="ar-text">المميزات</span></a>
+          <a href="#comparison"><span class="en-text">Compare</span><span class="ar-text">مقارنة</span></a>
+          <a href="#ai-tools"><span class="en-text">AI Tools</span><span class="ar-text">أدوات الذكاء</span></a>
+          <a href="#local-trust"><span class="en-text">GCC Focus</span><span class="ar-text">دول الخليج</span></a>
+          <a href="#pricing"><span class="en-text">Pricing</span><span class="ar-text">الأسعار</span></a>
+        </div>
+        <div class="nav-actions">
+          <div class="lang-toggle">
+            <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" id="lang-ar" onclick="setLang('ar')">ع</button>
+          </div>
+          <button class="nav-demo-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+            <span class="en-text">Book a Demo</span>
+            <span class="ar-text">احجز عرضاً</span>
+          </button>
+          <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#features" onclick="toggleMenu()"><span class="en-text">Features</span><span class="ar-text">المميزات</span></a>
+    <a href="#comparison" onclick="toggleMenu()"><span class="en-text">Compare</span><span class="ar-text">مقارنة</span></a>
+    <a href="#ai-tools" onclick="toggleMenu()"><span class="en-text">AI Tools</span><span class="ar-text">أدوات الذكاء</span></a>
+    <a href="#local-trust" onclick="toggleMenu()"><span class="en-text">GCC Focus</span><span class="ar-text">دول الخليج</span></a>
+    <a href="#cta" onclick="toggleMenu()"><span class="en-text">Book a Demo</span><span class="ar-text">احجز عرضاً</span></a>
+  </div>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="en-text">Replace outdated LMS platforms with one intelligent system.</span>
+            <span class="ar-text">استبدل أنظمة إدارة التعلم القديمة بنظام ذكي موحّد واحد.</span>
+          </h1>
+          <p class="hero-sub">
+            <span class="en-text">ILM is a modern, AI-powered academic platform built for universities and schools across Bahrain and the GCC — combining teaching, secure exams, live classes, and AI tools in one seamless experience.</span>
+            <span class="ar-text">إلم هي منصة أكاديمية حديثة مدعومة بالذكاء الاصطناعي، مصمّمة للجامعات والمدارس في البحرين ودول الخليج — تجمع التدريس والاختبارات الآمنة والفصول المباشرة وأدوات الذكاء الاصطناعي في تجربة واحدة متكاملة.</span>
+          </p>
+          <div class="btn-group">
+            <a href="#cta" class="btn btn-primary btn-lg">
+              <span class="en-text">Get Early Access</span>
+              <span class="ar-text">الوصول المبكر</span>
+            </a>
+            <a href="#features" class="btn btn-outline btn-lg">
+              <span class="en-text">Explore Features →</span>
+              <span class="ar-text">← استكشف المميزات</span>
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-value">5-in-1</div>
+              <div class="hero-stat-label"><span class="en-text">Platform modules</span><span class="ar-text">وحدات المنصة</span></div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">GCC</div>
+              <div class="hero-stat-label"><span class="en-text">Local support & data</span><span class="ar-text">دعم محلي وبيانات</span></div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">AI</div>
+              <div class="hero-stat-label"><span class="en-text">Native from day one</span><span class="ar-text">ذكاء اصطناعي أصيل</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual / Mock UI -->
+        <div class="hero-visual">
+          <div class="hero-card-stack">
+            <!-- Float top-right -->
+            <div class="mock-card-float top-right">
+              <div class="float-stat">
+                <div class="float-stat-value">98%</div>
+                <div class="float-stat-label">Uptime SLA</div>
+              </div>
+            </div>
+            <!-- Main card -->
+            <div class="mock-card mock-card-main">
+              <div class="mock-header">
+                <div class="mock-avatar"><img src="logo.jpeg" alt="ILM logo"/></div>
+                <div>
+                  <div class="mock-title">ILM Dashboard</div>
+                  <div class="mock-sub">Spring Semester 2025</div>
+                </div>
+              </div>
+              <div class="mock-modules">
+                <div class="mock-module"><div class="mock-module-icon">📚</div><div class="mock-module-label">Courses</div></div>
+                <div class="mock-module"><div class="mock-module-icon">🔒</div><div class="mock-module-label">Exams</div></div>
+                <div class="mock-module"><div class="mock-module-icon">🎥</div><div class="mock-module-label">Live Classes</div></div>
+                <div class="mock-module"><div class="mock-module-icon">🤖</div><div class="mock-module-label">AI Tools</div></div>
+              </div>
+              <div style="margin-bottom:10px;">
+                <div style="font-size:11px;color:rgba(246,231,188,0.5);margin-bottom:8px;">Student Progress</div>
+                <div class="mock-bars">
+                  <div class="mock-bar fill-cyan fill-75"></div>
+                  <div class="mock-bar fill-55"></div>
+                  <div class="mock-bar fill-cyan fill-85"></div>
+                  <div class="mock-bar fill-40"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Float bottom-left -->
+            <div class="mock-card-float bottom-left">
+              <div class="float-badge">
+                <div class="float-badge-icon">🤖</div>
+                <div>
+                  <div class="float-badge-text">AI Quiz Generated</div>
+                  <div class="float-badge-sub">15 questions • 2s</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cream-band"></div>
+
+  <!-- ════════════════════ LOGOS BAR (hidden — restore when ready) ════════════════════
+  <div class="logos-bar">
+    <div class="container">
+      <p class="logos-label">
+        <span class="en-text">Trusted by institutions across the GCC</span>
+        <span class="ar-text">موثوق من المؤسسات في دول الخليج</span>
+      </p>
+      <div class="logos-track">
+        <div class="logo-pill"><div class="logo-pill-dot"></div><span class="en-text">Universities</span><span class="ar-text">الجامعات</span></div>
+        <div class="logo-pill"><div class="logo-pill-dot"></div><span class="en-text">Colleges</span><span class="ar-text">الكليات</span></div>
+        <div class="logo-pill"><div class="logo-pill-dot"></div><span class="en-text">Private Schools</span><span class="ar-text">المدارس الخاصة</span></div>
+        <div class="logo-pill"><div class="logo-pill-dot"></div><span class="en-text">Training Centers</span><span class="ar-text">مراكز التدريب</span></div>
+        <div class="logo-pill"><div class="logo-pill-dot"></div><span class="en-text">Gov. Institutions</span><span class="ar-text">المؤسسات الحكومية</span></div>
+      </div>
+    </div>
+  </div>
+  ════════════════════ END LOGOS BAR ════════════════════ -->
+
+  <!-- ════════════════════ PROBLEM ════════════════════ -->
+  <section class="section problem" id="problem">
+    <div class="container">
+      <div class="problem-header">
+        <h2 class="section-title">
+          <span class="en-text">Current LMS platforms are failing students and educators.</span>
+          <span class="ar-text">أنظمة إدارة التعلم الحالية تُخذل الطلاب والأساتذة.</span>
+        </h2>
+        <p class="section-sub" style="margin:0 auto;">
+          <span class="en-text">Built for a different era — slow, expensive, and disconnected from modern education in the Gulf.</span>
+          <span class="ar-text">بُنيت لحقبة مختلفة — بطيئة ومكلفة ومنفصلة عن التعليم الحديث في الخليج.</span>
+        </p>
+      </div>
+      <div class="problem-cards-grid">
+        <div class="problem-card">
+          <div class="problem-card-icon">🐌</div>
+          <div class="problem-card-title"><span class="en-text">Slow & Frustrating</span><span class="ar-text">بطيء ومحبط</span></div>
+          <div class="problem-card-text"><span class="en-text">Outdated UX and slow load times drain productivity every single day — for both students and instructors.</span><span class="ar-text">واجهة قديمة وبطء تحميل يستنزفان إنتاجية الطلاب والأساتذة يومياً.</span></div>
+          <div class="problem-card-bullets">
+            <div class="problem-card-bullet"><span class="en-text">Average page load of 8–12 seconds on campus networks</span><span class="ar-text">متوسط تحميل الصفحة 8–12 ثانية على شبكات الحرم الجامعي</span></div>
+            <div class="problem-card-bullet"><span class="en-text">Mobile experience is nearly unusable during peak hours</span><span class="ar-text">تجربة الجوال تكاد تكون غير قابلة للاستخدام في أوقات الذروة</span></div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-icon">🧩</div>
+          <div class="problem-card-title"><span class="en-text">Too Many Tools</span><span class="ar-text">أدوات كثيرة جداً</span></div>
+          <div class="problem-card-text"><span class="en-text">Blackboard, Respondus, Teams — all separate licenses, all separate logins. Switching between them kills focus.</span><span class="ar-text">بلاك بورد وريسبونداس وتيمز — كل واحدة بترخيص وبيانات دخول منفصلة. التنقل بينها يشتت التركيز.</span></div>
+          <div class="problem-card-bullets">
+            <div class="problem-card-bullet"><span class="en-text">5+ separate logins per user on average</span><span class="ar-text">أكثر من 5 تسجيلات دخول منفصلة لكل مستخدم في المتوسط</span></div>
+            <div class="problem-card-bullet"><span class="en-text">Integration failures between tools cause recurring data loss</span><span class="ar-text">أعطال التكامل تتسبب في فقدان البيانات بشكل متكرر</span></div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-icon">🌐</div>
+          <div class="problem-card-title"><span class="en-text">No Local Support</span><span class="ar-text">لا دعم محلي</span></div>
+          <div class="problem-card-text"><span class="en-text">Global platforms don't understand Gulf academics, Arabic, or regional compliance — it was never their priority.</span><span class="ar-text">المنصات العالمية لا تفهم الأكاديمية الخليجية أو العربية أو متطلبات الامتثال — فهي لم تكن أولويتها.</span></div>
+          <div class="problem-card-bullets">
+            <div class="problem-card-bullet"><span class="en-text">RTL layout broken or inconsistent across most platforms</span><span class="ar-text">تخطيط RTL مكسور أو غير متسق في معظم المنصات</span></div>
+            <div class="problem-card-bullet"><span class="en-text">Support operates across time zones — delays of 24–48 hrs</span><span class="ar-text">الدعم يعمل عبر مناطق زمنية مختلفة — تأخيرات تصل إلى 24-48 ساعة</span></div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-icon">💸</div>
+          <div class="problem-card-title"><span class="en-text">Hidden Costs</span><span class="ar-text">تكاليف خفية</span></div>
+          <div class="problem-card-text"><span class="en-text">Per-user fees stacked across multiple platforms make budgeting unpredictable and consistently over estimate.</span><span class="ar-text">رسوم لكل مستخدم عبر منصات متعددة تجعل الميزانية غير قابلة للتنبؤ وتتجاوز التقديرات باستمرار.</span></div>
+          <div class="problem-card-bullets">
+            <div class="problem-card-bullet"><span class="en-text">Add-on costs routinely triple the initial quoted price</span><span class="ar-text">تكاليف الإضافات تضاعف السعر المعروض ثلاث مرات بشكل متكرر</span></div>
+            <div class="problem-card-bullet"><span class="en-text">No transparent all-inclusive pricing model in the market</span><span class="ar-text">لا يوجد نموذج تسعير شفاف وشامل في السوق</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ TESTIMONIALS ════════════════════ -->
+  <section class="section testimonials" id="testimonials">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">
+          <span class="en-text">Educator's Opinions</span>
+          <span class="ar-text">آراء المعلمين.</span>
+        </h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            <span class="en-text">Blackboard has been a nightmare for our faculty. The interface is outdated, file uploads crash regularly, and support tickets take weeks to resolve. Our students complain about it every single semester.</span>
+            <span class="ar-text">كان بلاك بورد كابوساً لأعضاء هيئة التدريس لدينا. الواجهة قديمة، ورفع الملفات يتعطل باستمرار، وتذاكر الدعم تستغرق أسابيع. يشكو طلابنا منه كل فصل دراسي.</span>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">DA</div>
+            <div>
+              <div class="testimonial-name"><span class="en-text">Dr. Ahmed Al-Mansoori</span><span class="ar-text">د. أحمد المنصوري</span></div>
+              <div class="testimonial-role"><span class="en-text">Dean of Academic Affairs, Bahrain</span><span class="ar-text">عميد الشؤون الأكاديمية، البحرين</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            <span class="en-text">We pay for Canvas, then Zoom on top, then a separate proctoring tool, then a plagiarism checker. The total cost spiraled way beyond budget — and none of the tools actually talk to each other.</span>
+            <span class="ar-text">ندفع مقابل كانفاس، ثم زوم فوق ذلك، ثم أداة مراقبة منفصلة، ثم مدقق للسرقة الأدبية. تضاعفت التكاليف بعيداً عن الميزانية — ولا تتواصل هذه الأدوات مع بعضها أصلاً.</span>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">FR</div>
+            <div>
+              <div class="testimonial-name"><span class="en-text">Fatima Al-Rashidi</span><span class="ar-text">فاطمة الراشدي</span></div>
+              <div class="testimonial-role"><span class="en-text">IT Director, Gulf University</span><span class="ar-text">مديرة تقنية المعلومات، جامعة الخليج</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            <span class="en-text">Moodle looked affordable on paper but the setup, maintenance, and complete lack of Arabic support made it a constant headache. Our faculty spent more time fighting the system than actually teaching.</span>
+            <span class="ar-text">بدا ميدل بأسعار معقولة على الورق، لكن الإعداد والصيانة والغياب التام لدعم اللغة العربية جعله صداعاً مستمراً. قضى أعضاء هيئة التدريس وقتاً أطول في محاربة النظام بدلاً من التدريس.</span>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">OK</div>
+            <div>
+              <div class="testimonial-name"><span class="en-text">Prof. Omar Al-Khalifa</span><span class="ar-text">أ. عمر الخليفة</span></div>
+              <div class="testimonial-role"><span class="en-text">Head of EdTech, GCC Institute</span><span class="ar-text">رئيس تقنية التعليم، معهد الخليج</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cream-band"></div>
+
+  <!-- ════════════════════ FEATURES ════════════════════ -->
+  <section class="section features" id="features">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:28px; position:relative;z-index:1;">
+        <h2 class="section-title light">
+          <span class="en-text">Every tool you need.<br/>One place.</span>
+          <span class="ar-text">خمس منصات.<br/>نظام موحد واحد.</span>
+        </h2>
+        <p class="section-sub light" style="margin:0 auto;">
+          <span class="en-text">Replace your entire academic software stack with one fast, modern platform.</span>
+          <span class="ar-text">استبدل مجموعة برامجك الأكاديمية بمنصة واحدة سريعة وحديثة.</span>
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card featured">
+          <div class="feature-icon">📚</div>
+          <div class="feature-title"><span class="en-text">LMS Core</span><span class="ar-text">نظام إدارة التعلم</span></div>
+          <div class="feature-text">
+            <span class="en-text">Course management, grade books, assignments, and tracking — faster and cleaner than Blackboard.</span>
+            <span class="ar-text">إدارة كاملة للمقررات ودفاتر الدرجات والإعلانات والواجبات والمتابعة الأكاديمية — أسرع وأوضح من بلاك بورد.</span>
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag"><span class="en-text">Courses</span><span class="ar-text">المقررات</span></span>
+            <span class="feature-tag"><span class="en-text">Grades</span><span class="ar-text">الدرجات</span></span>
+            <span class="feature-tag"><span class="en-text">Materials</span><span class="ar-text">المواد</span></span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title"><span class="en-text">Secure Exam Lockdown</span><span class="ar-text">قفل الاختبار الآمن</span></div>
+          <div class="feature-text">
+            <span class="en-text">Built-in lockdown browser with real-time proctoring. No Respondus needed.</span>
+            <span class="ar-text">متصفح قفل مدمج — لا حاجة لريسبونداس. يمنع التبديل بين الصفحات والنسخ/اللصق والتسجيل مع مراقبة فورية.</span>
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag"><span class="en-text">Anti-Cheat</span><span class="ar-text">منع الغش</span></span>
+            <span class="feature-tag"><span class="en-text">Proctoring</span><span class="ar-text">المراقبة</span></span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎥</div>
+          <div class="feature-title"><span class="en-text">Live Classes & Collaboration</span><span class="ar-text">الفصول المباشرة والتعاون</span></div>
+          <div class="feature-text">
+            <span class="en-text">Integrated video, chat, and collaboration. No Teams or Zoom needed.</span>
+            <span class="ar-text">مؤتمرات فيديو ودردشة وأدوات تعاون متكاملة. لا حاجة لتيمز أو زوم — كل شيء داخل إلم.</span>
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag"><span class="en-text">Video</span><span class="ar-text">فيديو</span></span>
+            <span class="feature-tag"><span class="en-text">Chat</span><span class="ar-text">دردشة</span></span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-title"><span class="en-text">AI Detection</span><span class="ar-text">كشف الذكاء الاصطناعي</span></div>
+          <div class="feature-text">
+            <span class="en-text">Instantly detect AI-generated content and plagiarism in every student submission.</span>
+            <span class="ar-text">يمكن للأساتذة الكشف الفوري عن المحتوى المُولَّد بالذكاء الاصطناعي والسرقة الأدبية في تسليمات الطلاب.</span>
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag"><span class="en-text">Plagiarism</span><span class="ar-text">السرقة الأدبية</span></span>
+            <span class="feature-tag"><span class="en-text">AI Check</span><span class="ar-text">فحص الذكاء</span></span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <div class="feature-title"><span class="en-text">AI Content Generator</span><span class="ar-text">مولّد المحتوى بالذكاء الاصطناعي</span></div>
+          <div class="feature-text">
+            <span class="en-text">Generate quizzes, exams, and assessments in seconds with auto-grading built in.</span>
+            <span class="ar-text">يُنشئ المدرسون اختبارات وواجبات وامتحانات وتقييمات في ثوانٍ — مع موازنة الصعوبة والتصحيح التلقائي.</span>
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag"><span class="en-text">Quiz Gen</span><span class="ar-text">توليد اختبارات</span></span>
+            <span class="feature-tag"><span class="en-text">Auto Grade</span><span class="ar-text">تصحيح تلقائي</span></span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title"><span class="en-text">Smart Analytics</span><span class="ar-text">التحليلات الذكية</span></div>
+          <div class="feature-text">
+            <span class="en-text">Real-time performance tracking with early identification of at-risk students.</span>
+            <span class="ar-text">تتبع الأداء في الوقت الفعلي. تحديد الطلاب المعرضين للخطر مبكراً وتقديم رؤى على مستوى المقرر.</span>
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag"><span class="en-text">Reports</span><span class="ar-text">تقارير</span></span>
+            <span class="feature-tag"><span class="en-text">Insights</span><span class="ar-text">رؤى</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cream-band"></div>
+
+  <!-- ════════════════════ SOLUTION / HOW IT WORKS ════════════════════ -->
+  <section class="section solution" id="solution">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">
+          <span class="en-text">Up and running in days,<br/>not months.</span>
+          <span class="ar-text">جاهز للعمل في أيام،<br/>لا أشهر.</span>
+        </h2>
+        <p class="section-sub">
+          <span class="en-text">ILM's onboarding is designed to be painless. Import your existing courses, migrate your data, and train your staff — all with dedicated local support.</span>
+          <span class="ar-text">التهيئة في إلم مصممة لتكون سلسة. استورد مقرراتك الحالية، انقل بياناتك، ودرّب موظفيك — بدعم محلي متخصص.</span>
+        </p>
+      </div>
+      <div class="solution-steps">
+        <svg class="steps-zigzag" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="zg" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0AC4E0"/>
+              <stop offset="100%" stop-color="#0992C2"/>
+            </linearGradient>
+          </defs>
+          <polyline
+            points="0,5 8,0 16,10 24,0 32,10 40,0 48,10 56,0 64,10 72,0 80,10 88,0 96,10 104,0 112,10 120,0 128,10 136,0 144,10 152,0 160,10 168,0 176,10 184,0 192,10 200,0 208,10 216,0 224,10 232,0 240,10 248,0 256,10 264,0 272,10 280,0 288,10 296,0 304,10 312,0 320,10 328,0 336,10 344,0 352,10 360,0 368,10 376,0 384,10 392,0 400,10 408,0 416,10 424,0 432,10 440,0 448,10 456,0 464,10 472,0 480,10 488,0 496,10 504,0 512,10 520,0 528,10 536,0 544,10 552,0 560,10 568,0 576,10 584,0 592,10 600,0 608,10 616,0 624,10 632,0 640,10 648,0 656,10 664,0 672,10 680,0 688,10 696,0 704,10 712,0 720,10 728,0 736,10 744,0 752,10 760,0 768,10 776,0 784,10 792,0 800,10 808,0 816,10 824,0 832,10 840,0 848,10 856,0 864,10 872,0 880,10 888,0 896,10 904,0 912,10 920,0 928,10 936,0 944,10 952,0 960,10 968,0 976,10 984,0 992,10 1000,5"
+            fill="none" stroke="url(#zg)" stroke-width="2"
+            stroke-linecap="square" stroke-linejoin="miter"/>
+        </svg>
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-title"><span class="en-text">Request a Demo</span><span class="ar-text">طلب عرض توضيحي</span></div>
+          <div class="step-text"><span class="en-text">Book a personalized demo with our local team. We understand your institution's specific needs and setup.</span><span class="ar-text">احجز عرضاً مخصصاً مع فريقنا المحلي. نفهم احتياجات مؤسستك المحددة.</span></div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-title"><span class="en-text">Migrate Your Data</span><span class="ar-text">نقل البيانات</span></div>
+          <div class="step-text"><span class="en-text">Import courses directly from Blackboard, Canvas, or Moodle. Your dedicated onboarding team handles the heavy lifting.</span><span class="ar-text">استيراد المقررات مباشرةً من بلاك بورد أو كانفاس أو ميدل. يتولى فريق التهيئة المخصص العمل الشاق.</span></div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-title"><span class="en-text">Train & Deploy</span><span class="ar-text">التدريب والنشر</span></div>
+          <div class="step-text"><span class="en-text">Fast onboarding for faculty and staff. Intuitive design means minimal training time — most instructors are productive within hours.</span><span class="ar-text">تهيئة سريعة للأعضاء والموظفين. التصميم البديهي يعني وقت تدريب أقل — معظم الأساتذة يعملون بكفاءة خلال ساعات.</span></div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-title"><span class="en-text">Ongoing Local Support</span><span class="ar-text">دعم محلي مستمر</span></div>
+          <div class="step-text"><span class="en-text">Our team is in Bahrain. When you have an issue, you reach someone who understands your academic calendar, not a global helpdesk.</span><span class="ar-text">فريقنا في البحرين. عند وجود مشكلة، تصل إلى من يفهم تقويمك الأكاديمي، لا مركز دعم عالمي.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ COMPARISON ════════════════════ -->
+  <section class="section comparison" id="comparison">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">
+          <span class="en-text">Not all platforms are built equal.</span>
+          <span class="ar-text">إلم مقابل المنصات التقليدية.</span>
+        </h2>
+        <p class="section-sub">
+          <span class="en-text">See exactly how ILM stacks up against the platforms your institution is probably using today.</span>
+          <span class="ar-text">اكتشف كيف تتفوق إلم على المنصات التي تستخدمها مؤسستك اليوم.</span>
+        </p>
+      </div>
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="regular"><span class="en-text">Feature</span><span class="ar-text">الميزة</span></th>
+              <th class="highlight">ILM</th>
+              <th class="regular">Blackboard</th>
+              <th class="regular">Canvas</th>
+              <th class="regular">Moodle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feature-name"><span class="en-text">Built-in AI Tools</span><span class="ar-text">أدوات ذكاء اصطناعي مدمجة</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">Lockdown Exams (Built-in)</span><span class="ar-text">اختبارات مقفلة (مدمجة)</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="partial">Extra Tool</span></td>
+              <td><span class="partial">Partial</span></td>
+              <td><span class="partial">Partial</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">AI Plagiarism Detection</span><span class="ar-text">كشف السرقة بالذكاء الاصطناعي</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="partial">Extra Cost</span></td>
+              <td><span class="partial">Extra Cost</span></td>
+              <td><span class="partial">Plugin</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">Modern UI / UX</span><span class="ar-text">واجهة حديثة</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">Partial</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">Arabic Language Support</span><span class="ar-text">دعم اللغة العربية</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">Limited</span></td>
+              <td><span class="partial">Limited</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">GCC-Local Support</span><span class="ar-text">دعم محلي خليجي</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">Smart Analytics</span><span class="ar-text">تحليلات ذكية</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="partial">Basic</span></td>
+              <td><span class="partial">Basic</span></td>
+              <td><span class="partial">Limited</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">Mobile App</span><span class="ar-text">تطبيق الجوال</span></td>
+              <td class="ilm-col"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">Limited</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name"><span class="en-text">Annual Pricing (BHD)</span><span class="ar-text">السعر السنوي (د.ب)</span></td>
+              <td class="ilm-col" style="font-weight:700; color:#0AC4E0;">65,000</td>
+              <td style="font-weight:600; font-size:12px;">117,000<br/><span style="font-weight:400;color:#64748b;">per year</span></td>
+              <td style="font-weight:600; font-size:12px;">100,000<br/><span style="font-weight:400;color:#64748b;">per 10,000 users</span></td>
+              <td style="font-weight:600; font-size:12px;">120,000–350,000<br/><span style="font-weight:400;color:#64748b;">per 10,000 users/yr</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:16px; font-size:13px; color:var(--gray-600); text-align:center;">
+        * Secure exam lockdown is available as an add-on for <strong>30,000 BHD/year</strong>.
+      </p>
+    </div>
+  </section>
+
+  <div class="cream-band"></div>
+
+  <!-- ════════════════════ LOCAL TRUST ════════════════════ -->
+  <section class="section local-trust" id="local-trust">
+    <div class="container">
+      <div class="trust-grid">
+        <div>
+          <h2 class="section-title light">
+            <span class="en-text">Built here.<br/>For institutions like yours.</span>
+            <span class="ar-text">بُني هنا.<br/>لمؤسسات مثل مؤسستك.</span>
+          </h2>
+          <p class="section-sub light">
+            <span class="en-text">ILM is locally based in Bahrain. That means faster support, shorter feedback loops, a team that understands your academic calendar, and data that stays in the region.</span>
+            <span class="ar-text">إلم مقرها البحرين. هذا يعني دعماً أسرع، ودورات تغذية راجعة أقصر، وفريقاً يفهم تقويمك الأكاديمي، وبيانات تبقى في المنطقة.</span>
+          </p>
+          <div style="margin-top:36px;">
+            <a href="#cta" class="btn btn-cream btn-lg">
+              <span class="en-text">Talk to Our Team</span>
+              <span class="ar-text">تحدث مع فريقنا</span>
+            </a>
+          </div>
+        </div>
+        <div class="trust-cards">
+          <div class="trust-card">
+            <div class="trust-card-icon">🇧🇭</div>
+            <div>
+              <div class="trust-card-title"><span class="en-text">Locally Based in Bahrain</span><span class="ar-text">مقرها البحرين</span></div>
+              <div class="trust-card-text"><span class="en-text">Our team operates locally, understands Gulf education, and responds quickly — not after a 12-hour timezone difference.</span><span class="ar-text">فريقنا يعمل محلياً، يفهم التعليم الخليجي، ويستجيب بسرعة — لا فارق 12 ساعة في التوقيت.</span></div>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-card-icon">🔐</div>
+            <div>
+              <div class="trust-card-title"><span class="en-text">Regional Data Privacy</span><span class="ar-text">خصوصية البيانات الإقليمية</span></div>
+              <div class="trust-card-text"><span class="en-text">Your institution's data stays in the region. GDPR-level compliance with regional adaptations for GCC data governance requirements.</span><span class="ar-text">بيانات مؤسستك تبقى في المنطقة. امتثال على مستوى GDPR مع تكييفات إقليمية لمتطلبات حوكمة البيانات الخليجية.</span></div>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-card-icon">🏛️</div>
+            <div>
+              <div class="trust-card-title"><span class="en-text">Understands Gulf Academia</span><span class="ar-text">يفهم الأكاديمية الخليجية</span></div>
+              <div class="trust-card-text"><span class="en-text">Academic calendars, semester structures, Arabic curriculum needs, and GCC accreditation requirements — ILM is designed with all of this in mind.</span><span class="ar-text">التقاويم الأكاديمية، وهياكل الفصول، واحتياجات المناهج العربية، ومتطلبات الاعتماد الخليجية — صُمِّمت إلم مع كل هذا في الاعتبار.</span></div>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-card-icon">⚡</div>
+            <div>
+              <div class="trust-card-title"><span class="en-text">Faster Issue Resolution</span><span class="ar-text">حل أسرع للمشكلات</span></div>
+              <div class="trust-card-text"><span class="en-text">When exams are running and something breaks, you need help now. Our local team resolves critical issues in hours, not days.</span><span class="ar-text">عند إجراء الاختبارات وحدوث خلل، تحتاج المساعدة الآن. فريقنا المحلي يحل المشكلات الحرجة في ساعات، لا أيام.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cream-band"></div>
+
+  <!-- ════════════════════ AI TOOLS ════════════════════ -->
+  <section class="section ai-tools" id="ai-tools">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">
+          <span class="en-text">AI that works for<br/>educators, not against them.</span>
+          <span class="ar-text">ذكاء اصطناعي يعمل<br/>لصالح المعلمين لا ضدهم.</span>
+        </h2>
+        <p class="section-sub">
+          <span class="en-text">ILM's AI tools are built specifically for academic contexts — detecting misconduct and helping educators create better assessments faster.</span>
+          <span class="ar-text">أدوات الذكاء الاصطناعي في إلم مبنية خصيصاً للسياقات الأكاديمية — للكشف عن المخالفات ومساعدة المعلمين على إنشاء تقييمات أفضل وأسرع.</span>
+        </p>
+      </div>
+      <div class="ai-grid">
+        <div class="ai-tool-card">
+          <div class="ai-tool-icon">🔍</div>
+          <div class="ai-tool-title"><span class="en-text">AI Detector</span><span class="ar-text">كاشف الذكاء الاصطناعي</span></div>
+          <div class="ai-tool-text">
+            <span class="en-text">Give professors confidence in student work. ILM's unified AI detection engine identifies AI-generated content and plagiarism in a single scan.</span>
+            <span class="ar-text">امنح الأساتذة الثقة في أعمال الطلاب. يحدد محرك الكشف الموحد في إلم المحتوى المُولَّد بالذكاء الاصطناعي والسرقة الأدبية في فحص واحد.</span>
+          </div>
+          <div class="ai-feature-list">
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">Detects ChatGPT, Gemini, Claude, and other models</span><span class="ar-text">يكشف ChatGPT وGemini وكلود وغيرها</span></div>
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">Cross-submission plagiarism checking</span><span class="ar-text">فحص الاقتباس بين التسليمات</span></div>
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">Detailed confidence reports per submission</span><span class="ar-text">تقارير ثقة تفصيلية لكل تسليم</span></div>
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">Works on essays, code, and PDFs</span><span class="ar-text">يعمل على المقالات والكود وملفات PDF</span></div>
+          </div>
+        </div>
+        <div class="ai-tool-card">
+          <div class="ai-tool-icon">✨</div>
+          <div class="ai-tool-title"><span class="en-text">AI Assessment Generator</span><span class="ar-text">مولّد التقييمات بالذكاء الاصطناعي</span></div>
+          <div class="ai-tool-text">
+            <span class="en-text">Create quizzes, assignments, midterms, and full exam papers in seconds. Upload a syllabus or lecture notes and ILM generates balanced, high-quality questions.</span>
+            <span class="ar-text">أنشئ اختبارات وواجبات وامتحانات نصفية وأوراق اختبار كاملة في ثوانٍ. ارفع المنهج أو ملاحظات المحاضرة وتُنشئ إلم أسئلة متوازنة وعالية الجودة.</span>
+          </div>
+          <div class="ai-feature-list">
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">Generate from syllabus or lecture slides</span><span class="ar-text">توليد من المنهج أو شرائح المحاضرة</span></div>
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">Automatic difficulty balancing</span><span class="ar-text">موازنة الصعوبة تلقائياً</span></div>
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">MCQ, short answer, and essay formats</span><span class="ar-text">صيغ MCQ والإجابات القصيرة والمقالات</span></div>
+            <div class="ai-feature-item"><div class="ai-feature-dot"></div><span class="en-text">One-click publish directly to courses</span><span class="ar-text">نشر بنقرة واحدة مباشرةً إلى المقررات</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════ CTA ════════════════════ -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <h2 class="cta-title">
+        <span class="en-text">Upgrade your institution's<br/>learning experience.</span>
+        <span class="ar-text">طوّر تجربة التعلم<br/>في مؤسستك.</span>
+      </h2>
+      <p class="cta-sub">
+        <span class="en-text">Join the waitlist or book a personalized demo with our local team. No commitment required — just a conversation.</span>
+        <span class="ar-text">انضم إلى قائمة الانتظار أو احجز عرضاً مخصصاً مع فريقنا المحلي. لا التزام مطلوب — مجرد محادثة.</span>
+      </p>
+      <div class="cta-buttons">
+        <a href="mailto:hello@ilm.bh" class="btn btn-navy btn-lg">
+          <span class="en-text">Book a Demo</span>
+          <span class="ar-text">احجز عرضاً توضيحياً</span>
+        </a>
+        <a href="mailto:hello@ilm.bh" class="btn btn-outline btn-lg">
+          <span class="en-text">Join the Waitlist</span>
+          <span class="ar-text">انضم لقائمة الانتظار</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FOOTER ════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="nav-logo">
+            <div class="nav-logo-mark"><img src="logo.jpeg" alt="ILM logo"/></div>
+            <div class="nav-logo-text">IL<span>M</span></div>
+          </div>
+          <p class="footer-brand-text">
+            <span class="en-text">The AI-native academic platform built for universities and schools across Bahrain and the GCC. One platform. Total control.</span>
+            <span class="ar-text">منصة أكاديمية أصيلة بالذكاء الاصطناعي مبنية للجامعات والمدارس في البحرين ودول الخليج. منصة واحدة. تحكم كامل.</span>
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title"><span class="en-text">Platform</span><span class="ar-text">المنصة</span></div>
+          <div class="footer-links">
+            <a href="#features"><span class="en-text">Features</span><span class="ar-text">المميزات</span></a>
+            <a href="#ai-tools"><span class="en-text">AI Tools</span><span class="ar-text">أدوات الذكاء</span></a>
+            <a href="#comparison"><span class="en-text">Compare</span><span class="ar-text">مقارنة</span></a>
+            <a href="#pricing"><span class="en-text">Pricing</span><span class="ar-text">الأسعار</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Language Toggle ──────────────────────────────────────────
+    function setLang(lang) {
+      document.body.setAttribute('lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      if (lang === 'ar') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.getElementById('lang-ar').classList.add('active');
+        document.getElementById('lang-en').classList.remove('active');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.getElementById('lang-en').classList.add('active');
+        document.getElementById('lang-ar').classList.remove('active');
+      }
+      localStorage.setItem('ilm-lang', lang);
+    }
+
+    // Restore saved language
+    const savedLang = localStorage.getItem('ilm-lang');
+    if (savedLang) setLang(savedLang);
+
+    // ── Navbar scroll ────────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // ── Mobile menu ──────────────────────────────────────────────
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('open');
+    }
+
+    // ── Smooth scroll for anchor links ───────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Intersection Observer for fade-in animations ─────────────
+    const style = document.createElement('style');
+    style.textContent = `
+      .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+      .fade-in.visible { opacity: 1; transform: translateY(0); }
+    `;
+    document.head.appendChild(style);
+
+    const animatables = [
+      ...document.querySelectorAll('.feature-card'),
+      ...document.querySelectorAll('.problem-item'),
+      ...document.querySelectorAll('.step-card'),
+      ...document.querySelectorAll('.trust-card'),
+      ...document.querySelectorAll('.ai-tool-card'),
+      ...document.querySelectorAll('.testimonial-card'),
+    ];
+    animatables.forEach((el, i) => {
+      el.classList.add('fade-in');
+      el.style.transitionDelay = `${(i % 4) * 80}ms`;
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animatables.forEach(el => observer.observe(el));
+
+    // Falling blue leaves on comparison section
+    (function() {
+      const section = document.querySelector('.comparison');
+      if (!section) return;
+      const colors = [
+        'rgba(10,196,224,0.55)',
+        'rgba(9,146,194,0.45)',
+        'rgba(11,45,114,0.30)',
+        'rgba(10,196,224,0.35)',
+        'rgba(9,146,194,0.60)',
+      ];
+      const total = 35;
+      for (let i = 0; i < total; i++) {
+        const leaf = document.createElement('div');
+        leaf.className = 'falling-leaf';
+        const size = Math.random() * 14 + 9;
+        // Evenly spread across width with small random offset
+        const baseLeft = (i / total) * 100;
+        const left = Math.min(98, Math.max(2, baseLeft + (Math.random() * 6 - 3)));
+        leaf.style.cssText = [
+          `width:${size}px`,
+          `height:${size * 1.7}px`,
+          `left:${left}%`,
+          `background:${colors[Math.floor(Math.random() * colors.length)]}`,
+          `animation-duration:${(Math.random() * 7 + 6).toFixed(1)}s`,
+          `animation-delay:${(Math.random() * 12).toFixed(1)}s`,
+        ].join(';');
+        section.appendChild(leaf);
+      }
+    })();
+  </script>
+</body>
+</html>
