@@ -486,7 +486,7 @@
 
     /* ─── Comparison ────────────────────────────────────────────── */
     .comparison { background: var(--cream); }
-    .comparison-table-wrap { overflow-x: hidden; margin-top: 48px; border-radius: var(--radius); }
+    .comparison-table-wrap { overflow-x: auto; margin-top: 48px; border-radius: var(--radius); }
     .comparison-table {
       width: 100%; border-collapse: collapse;
       background: var(--white); border-radius: var(--radius);
@@ -543,8 +543,8 @@
       overflow: hidden;
     }
     .comparison .container { position: relative; z-index: 2; }
-    .comparison .section-title { font-size: clamp(22px, 3vw, 36px); margin-bottom: 10px; }
-    .comparison .section-sub { font-size: 15px; margin-bottom: 0; }
+    .comparison .section-title { font-size: clamp(22px, 5vw, 36px); margin-bottom: 10px; }
+    .comparison .section-sub { font-size: clamp(13px, 3vw, 15px); margin-bottom: 0; }
     .comparison .comparison-table-wrap { margin-top: 28px; }
     .comparison .comparison-table th { padding: 15px 22px; font-size: 14px; }
     .comparison .comparison-table td { padding: 13px 22px; font-size: 14px; }
@@ -770,58 +770,112 @@
     }
     .mobile-menu a:last-child { border-bottom: none; }
 
-    /* ════════════════════════════════════════════════════════
-       PC / DESKTOP  —  base styles above apply to all screens
-       above 640 px. Nothing in this block needs to change.
-       ════════════════════════════════════════════════════════ */
+    /* ─── Responsive ────────────────────────────────────────────── */
 
-    /* ─── General responsive (tablet / small screens) ──────── */
     @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 64px 0; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; }
       .hero-visual { display: none; }
-      .problem-grid, .trust-grid, .ai-grid { grid-template-columns: 1fr; gap: 40px; }
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .features-top-row { grid-template-columns: 1fr 1fr; }
-      .solution-steps { grid-template-columns: 1fr 1fr; }
+      .trust-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ai-grid { grid-template-columns: 1fr; gap: 32px; }
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .features-top-row { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .solution-steps { grid-template-columns: 1fr 1fr; gap: 28px; }
       .solution-steps::before { display: none; }
-      .testimonials-grid { grid-template-columns: 1fr 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .steps-zigzag { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .problem-cards-grid { grid-template-columns: 1fr 1fr; }
+      .hero-sub { font-size: 16px; }
+      .section-sub { font-size: 16px; }
+      .cta-section { padding: 80px 0; }
     }
 
     @media (max-width: 768px) {
-      .section { padding: 72px 0; }
+      .container { padding: 0 20px; }
+      .section { padding: 64px 0; }
+      .section-sm { padding: 48px 0; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .features-grid { grid-template-columns: 1fr; }
-      .features-top-row { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .solution-steps { grid-template-columns: 1fr; }
+      .nav-demo-btn { padding: 8px 14px; font-size: 12px; }
+      .hero { min-height: auto; padding-bottom: 60px; }
+      .hero-inner { padding: 48px 0 40px; gap: 32px; }
+      .hero-title { font-size: clamp(26px, 6vw, 36px); }
+      .hero-sub { font-size: 15px; margin-bottom: 28px; }
+      .hero-stats { gap: 20px; flex-wrap: wrap; margin-top: 32px; padding-top: 28px; }
+      .hero-stat-value { font-size: 22px; }
+      .btn-group { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .btn-lg { padding: 14px 28px; font-size: 15px; width: 100%; justify-content: center; }
+      .features-grid { grid-template-columns: 1fr; gap: 16px; }
+      .features-top-row { grid-template-columns: 1fr; gap: 16px; }
+      .problem-cards-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
+      .solution-steps { grid-template-columns: 1fr; gap: 20px; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .logos-track { gap: 20px; }
-      .hero-stats { gap: 24px; flex-wrap: wrap; }
-      .security-items { gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+      .footer-socials { justify-content: center; }
+      .logos-track { gap: 12px; }
+      .logo-pill { padding: 8px 16px; font-size: 12px; }
+      .security-items { gap: 20px; flex-direction: column; align-items: center; text-align: center; }
+      .cta-section { padding: 64px 0; }
+      .cta-title { font-size: clamp(28px, 7vw, 42px); }
+      .cta-sub { font-size: 15px; }
+      .cta-buttons { flex-direction: column; align-items: center; gap: 12px; }
+      .cta-buttons .btn { width: 100%; max-width: 320px; justify-content: center; }
+      .section-title { font-size: clamp(24px, 5.5vw, 36px); }
+      .section-sub { font-size: 14px; }
+      .trust-grid { gap: 28px; }
+      .ai-grid { gap: 24px; margin-top: 36px; }
+      .ai-tool-card { padding: 24px; }
+      .feature-card { padding: 22px; }
+      .testimonial-card { padding: 24px; }
+      .step-card { padding: 24px 16px; }
+      .trust-card { padding: 18px 20px; }
+      .problem-card { padding: 16px 18px; }
+      .comparison.section { min-height: unset; justify-content: flex-start; padding: 72px 0; }
+      .comparison .section-title { font-size: clamp(15px, 4vw, 20px); margin-bottom: 8px; }
+      .comparison .section-sub { font-size: 11px; }
+      .comparison .comparison-table th { padding: 5px 7px; font-size: 9px; }
+      .comparison .comparison-table td { padding: 5px 7px; font-size: 9px; }
+      .comparison .check  { font-size: 11px; }
+      .comparison .cross  { font-size: 11px; }
+      .comparison .partial { font-size: 8px; }
+      .comparison .comparison-table td[style] { font-size: 9px !important; }
+      .comparison .comparison-table td span[style] { font-size: 8px !important; display: block; margin-top: 2px; }
+      .comparison .comparison-table td br { display: none; }
+      .comparison .comparison-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
+      .comparison .comparison-table-wrap::-webkit-scrollbar { display: none; }
+      .comparison-table { min-width: 340px; }
     }
 
-    /* ════════════════════════════════════════════════════════
-       PHONE ONLY  —  comparison section fixes (max 640 px)
-       PC styles above are completely untouched.
-       Only the layout clipping bug and table scroll are fixed.
-       ════════════════════════════════════════════════════════ */
-    @media (max-width: 640px) {
-      /* ── Comparison section: fix viewport-centering clip ── */
-      .comparison.section {
-        min-height: unset;
-        justify-content: flex-start;
-        padding: 72px 0;
-      }
-
-      /* ── Shrink title + subtitle to match phone scale ── */
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .section { padding: 52px 0; }
+      .nav-inner { height: 60px; }
+      .mobile-menu { top: 60px; }
+      .nav-logo-text { font-size: 18px; }
+      .nav-logo-mark { width: 32px; height: 32px; }
+      .nav-demo-btn { display: none; }
+      .hero-inner { padding: 40px 0 32px; }
+      .hero-title { font-size: clamp(24px, 7.5vw, 32px); }
+      .hero-sub { font-size: 14px; max-width: 100%; }
+      .hero-stats { gap: 16px; }
+      .hero-stat-value { font-size: 20px; }
+      .badge { font-size: 11px; padding: 5px 12px; }
+      .section-title { font-size: clamp(22px, 7vw, 30px); }
+      .section-sub { font-size: 13px; }
+      .btn { padding: 12px 22px; font-size: 14px; }
+      .btn-lg { padding: 13px 22px; font-size: 14px; }
+      .features-grid { gap: 12px; }
+      .feature-card { padding: 18px; }
+      .feature-title { font-size: 15px; }
+      .feature-text { font-size: 13px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .logos-track { gap: 10px; }
+      .logo-pill { padding: 7px 12px; font-size: 11px; gap: 6px; }
+      .comparison.section { min-height: unset; justify-content: flex-start; }
       .comparison .section-title { font-size: clamp(15px, 4vw, 20px); margin-bottom: 8px; }
-      .comparison .section-sub   { font-size: 11px; }
-
-      /* ── Shrink table cells, text, and icons ── */
+      .comparison .section-sub { font-size: 11px; }
       .comparison .comparison-table th { padding: 5px 7px; font-size: 9px; }
       .comparison .comparison-table td { padding: 5px 7px; font-size: 9px; }
       .comparison .check  { font-size: 11px; }
@@ -831,16 +885,19 @@
       .comparison .comparison-table td[style] { font-size: 9px !important; }
       .comparison .comparison-table td span[style] { font-size: 8px !important; display: block; margin-top: 2px; }
       .comparison .comparison-table td br { display: none; }
-
-      /* ── Table: swipe left-right, scrollbar hidden ── */
-      .comparison .comparison-table-wrap {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
+      .comparison .comparison-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
       .comparison .comparison-table-wrap::-webkit-scrollbar { display: none; }
       .comparison-table { min-width: 340px; }
+      .cta-section { padding: 52px 0; }
+      .cta-title { font-size: clamp(24px, 8vw, 36px); letter-spacing: -0.5px; }
+      .cta-sub { font-size: 14px; }
+      .security-bar { padding: 36px 0; }
+      .testimonial-card { padding: 20px; }
+      .ai-tool-card { padding: 20px; }
+      .step-card { padding: 20px 14px; }
+      .trust-card { padding: 16px 18px; }
+      .problem-card { padding: 14px 16px; }
+      .footer { padding: 48px 0 24px; }
     }
   </style>
 </head>
@@ -866,8 +923,8 @@
             <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
             <button class="lang-btn" id="lang-ar" onclick="setLang('ar')">ع</button>
           </div>
-          <button class="nav-demo-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
-            <span class="en-text">Book a Demo</span>
+          <button class="nav-demo-btn" onclick="window.open('./index.html','_blank')">
+            <span class="en-text">Review the Demo</span>
             <span class="ar-text">احجز عرضاً</span>
           </button>
           <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -884,7 +941,7 @@
     <a href="#comparison" onclick="toggleMenu()"><span class="en-text">Compare</span><span class="ar-text">مقارنة</span></a>
     <a href="#ai-tools" onclick="toggleMenu()"><span class="en-text">AI Tools</span><span class="ar-text">أدوات الذكاء</span></a>
     <a href="#local-trust" onclick="toggleMenu()"><span class="en-text">GCC Focus</span><span class="ar-text">دول الخليج</span></a>
-    <a href="#cta" onclick="toggleMenu()"><span class="en-text">Book a Demo</span><span class="ar-text">احجز عرضاً</span></a>
+    <a href="./index.html" target="_blank" onclick="toggleMenu()"><span class="en-text">Review the Demo</span><span class="ar-text">احجز عرضاً</span></a>
   </div>
 
   <!-- ════════════════════ HERO ════════════════════ -->
@@ -1274,72 +1331,72 @@
           <tbody>
             <tr>
               <td class="feature-name"><span class="en-text">Built-in AI Tools</span><span class="ar-text">أدوات ذكاء اصطناعي مدمجة</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="check">✓</span></td>
+              <td data-label="Canvas"><span class="cross">✗</span></td>
+              <td data-label="Moodle"><span class="cross">✗</span></td>
             </tr>
             <tr>
               <td class="feature-name"><span class="en-text">Lockdown Exams (Built-in)</span><span class="ar-text">اختبارات مقفلة (مدمجة)</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="partial">Extra Tool</span></td>
-              <td><span class="partial">Partial</span></td>
-              <td><span class="partial">Partial</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="partial">Extra Tool</span></td>
+              <td data-label="Canvas"><span class="partial">Partial</span></td>
+              <td data-label="Moodle"><span class="partial">Partial</span></td>
             </tr>
             <tr>
               <td class="feature-name"><span class="en-text">AI Plagiarism Detection</span><span class="ar-text">كشف السرقة بالذكاء الاصطناعي</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="partial">Extra Cost</span></td>
-              <td><span class="partial">Extra Cost</span></td>
-              <td><span class="partial">Plugin</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="partial">Extra Cost</span></td>
+              <td data-label="Canvas"><span class="partial">Extra Cost</span></td>
+              <td data-label="Moodle"><span class="partial">Plugin</span></td>
             </tr>
             <tr>
               <td class="feature-name"><span class="en-text">Modern UI / UX</span><span class="ar-text">واجهة حديثة</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">Partial</span></td>
-              <td><span class="cross">✗</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="cross">✗</span></td>
+              <td data-label="Canvas"><span class="partial">Partial</span></td>
+              <td data-label="Moodle"><span class="cross">✗</span></td>
             </tr>
             <tr>
               <td class="feature-name"><span class="en-text">Arabic Language Support</span><span class="ar-text">دعم اللغة العربية</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">Limited</span></td>
-              <td><span class="partial">Limited</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="cross">✗</span></td>
+              <td data-label="Canvas"><span class="partial">Limited</span></td>
+              <td data-label="Moodle"><span class="partial">Limited</span></td>
             </tr>
             <tr>
               <td class="feature-name"><span class="en-text">GCC-Local Support</span><span class="ar-text">دعم محلي خليجي</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="cross">✗</span></td>
+              <td data-label="Canvas"><span class="cross">✗</span></td>
+              <td data-label="Moodle"><span class="cross">✗</span></td>
             </tr>
             <tr>
               <td class="feature-name"><span class="en-text">Smart Analytics</span><span class="ar-text">تحليلات ذكية</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="partial">Basic</span></td>
-              <td><span class="partial">Basic</span></td>
-              <td><span class="partial">Limited</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="partial">Basic</span></td>
+              <td data-label="Canvas"><span class="partial">Basic</span></td>
+              <td data-label="Moodle"><span class="partial">Limited</span></td>
             </tr>
             <tr>
               <td class="feature-name"><span class="en-text">Mobile App</span><span class="ar-text">تطبيق الجوال</span></td>
-              <td class="ilm-col"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">Limited</span></td>
-              <td><span class="cross">✗</span></td>
+              <td class="ilm-col" data-label="ILM"><span class="check">✓</span></td>
+              <td data-label="Blackboard"><span class="cross">✗</span></td>
+              <td data-label="Canvas"><span class="partial">Limited</span></td>
+              <td data-label="Moodle"><span class="cross">✗</span></td>
             </tr>
             <tr>
-              <td class="feature-name"><span class="en-text">Annual Pricing (BHD)</span><span class="ar-text">السعر السنوي (د.ب)</span></td>
-              <td class="ilm-col" style="font-weight:700; color:#0AC4E0;">65,000</td>
-              <td style="font-weight:600; font-size:12px;">117,000<br/><span style="font-weight:400;color:#64748b;">per year</span></td>
-              <td style="font-weight:600; font-size:12px;">100,000<br/><span style="font-weight:400;color:#64748b;">per 10,000 users</span></td>
-              <td style="font-weight:600; font-size:12px;">120,000–350,000<br/><span style="font-weight:400;color:#64748b;">per 10,000 users/yr</span></td>
+              <td class="feature-name"><span class="en-text">Annual Pricing (USD)</span><span class="ar-text">السعر السنوي (USD)</span></td>
+              <td class="ilm-col" data-label="ILM" style="font-weight:700; color:#0AC4E0;">$95,000/yr</td>
+              <td data-label="Blackboard" style="font-weight:600; font-size:12px;">~$135,000<br/><span style="font-weight:400;color:#64748b;">per 10,000 users</span></td>
+              <td data-label="Canvas" style="font-weight:600; font-size:12px;">$199,000<br/><span style="font-weight:400;color:#64748b;">per 10,000 users</span></td>
+              <td data-label="Moodle" style="font-weight:600; font-size:12px;">$117K–$350K<br/><span style="font-weight:400;color:#64748b;">per 10,000 users/yr</span></td>
             </tr>
           </tbody>
         </table>
       </div>
       <p style="margin-top:16px; font-size:13px; color:var(--gray-600); text-align:center;">
-        * Secure exam lockdown is available as an add-on for <strong>30,000 BHD/year</strong>.
+        * Secure exam lockdown is available as an add-on for <strong>$6,000/year</strong>.
       </p>
     </div>
   </section>
@@ -1460,8 +1517,8 @@
         <span class="ar-text">انضم إلى قائمة الانتظار أو احجز عرضاً مخصصاً مع فريقنا المحلي. لا التزام مطلوب — مجرد محادثة.</span>
       </p>
       <div class="cta-buttons">
-        <a href="mailto:hello@ilm.bh" class="btn btn-navy btn-lg">
-          <span class="en-text">Book a Demo</span>
+        <a href="./index.html" target="_blank" class="btn btn-navy btn-lg cta-demo-btn">
+          <span class="en-text">Review the Demo</span>
           <span class="ar-text">احجز عرضاً توضيحياً</span>
         </a>
         <a href="mailto:hello@ilm.bh" class="btn btn-outline btn-lg">
